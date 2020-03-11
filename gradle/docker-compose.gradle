@@ -1,0 +1,16 @@
+dockerCompose {
+
+    functional {
+        useComposeFiles = ['docker-compose.yml']
+        startedServices = ['component']
+        buildBeforeUp = true
+
+        removeImages = "Local" // Other accepted values are: "All" and "Local"
+    }
+}
+
+functionalComposeBuild.dependsOn(bootJar)
+functionalComposeUp.dependsOn(bootJar)
+functionalTest.dependsOn(functionalComposeUp)
+
+//test.dependsOn(composeUp)

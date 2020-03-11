@@ -1,0 +1,56 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test-with-coverage:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout Sourcecode
+        uses: actions/checkout@v1
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Test with Coverage
+        run: ./gradlew jacocoUnitTestReport
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml
+          flags: unittests
+          name: codecov-umbrella
+  functional-tests:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout Sourcecode
+        uses: actions/checkout@v1
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Test with Coverage
+        run: ./gradlew functionalTest
+  deploy-docker:
+    needs: [test-with-coverage, functional-tests]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v1
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - run: ./gradlew bootJar
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: fishey2/java-component-template/component
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          context: .
+          dockerfile: docker/component/Dockerfile
+          snapshot: true
+

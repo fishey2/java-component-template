@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'jacoco'
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.7.RELEASE'
+    id "com.avast.gradle.docker-compose" version "0.10.7"
+}
+
+group 'com.roboautomator'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-dependencies:2.2.2.RELEASE')
+    implementation('org.springframework.boot:spring-boot-starter-web:2.0.5.RELEASE')
+    implementation('ch.qos.logback:logback-classic:1.2.3')
+    implementation('io.springfox:springfox-swagger2:2.9.2')
+    implementation('io.springfox:springfox-swagger-ui:2.9.2')
+
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+    testImplementation('org.springframework.boot:spring-boot-starter-test:2.0.5.RELEASE')
+    testImplementation('org.mockito:mockito-core:2.22.0')
+    testImplementation('io.rest-assured:rest-assured:4.1.2')
+    testImplementation('io.rest-assured:json-path:4.1.2')
+    testImplementation('io.rest-assured:xml-path:4.1.2')
+}
+
+apply from: 'gradle/unit-test.gradle'
+apply from: 'gradle/functional-test.gradle'
+apply from: 'gradle/docker-compose.gradle'
+
+bootJar {
+    manifest {
+        attributes 'Start-Class': 'com.roboautomator.component.MainApplication'
+    }
+    mainClassName = 'com.roboautomator.component.MainApplication'
+}
+
+configurations.all {
+    exclude group:'junit', module:'junit'
+    exclude group:'org.mockito', module:'mockito-all'
+    exclude group:'org.slf4j', module:'slf4j-log4j12'
+    exclude group: 'org.springframework.boot', module:'spring-boot-starter-logging'
+}

@@ -1,0 +1,20 @@
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+task jacocoUnitTestReport(type: JacocoReport){
+    group "verification"
+    sourceSets sourceSets.main
+    executionData test
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.enabled true
+    }
+}
+
+jacocoUnitTestReport.dependsOn test
