@@ -4,7 +4,7 @@
 [![codecov](https://codecov.io/gh/fishey2/java-component-template/branch/master/graph/badge.svg?token=P8Z80pYCt0)](https://codecov.io/gh/fishey2/java-component-template)
 
 ## Description
-
+Component template project for Java including Spring Boot 2 and JUnit
 
 ## Installed
 
@@ -17,10 +17,13 @@
 
 ```bash
 
+# Compile first
+./gradlew clean build
+
 # Building the docker container
 (projectRoot)$ docker-compose build
 
--> This will generate a container roboautomator/foodprint:0.1-SNAPSHOT
+-> This will generate a container docker.pkg.github.com/fishey2/java-component-template/component:0.1-SNAPSHOT
 
 # Running the docker container
 (projectRoot)$ docker-compose up &
