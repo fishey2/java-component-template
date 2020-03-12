@@ -1,7 +1,7 @@
 # Java Component Template 
 
 [![Actions Status](https://github.com/fishey2/java-component-template/workflows/Java%20CI/badge.svg)](https://github.com/fishey2/java-component-template/actions)
-[![codecov](https://codecov.io/gh/fishey2/java-component-template/branch/master/graph/badge.svg?token=P8Z80pYCt0)](https://codecov.io/gh/fishey2/java-component-template)
+[![codecov](https://codecov.io/gh/fishey2/java-component-template/branch/master/graph/badge.svg?token=BuPjnBJ5YK)](https://codecov.io/gh/fishey2/java-component-template)
 
 ## Description
 
