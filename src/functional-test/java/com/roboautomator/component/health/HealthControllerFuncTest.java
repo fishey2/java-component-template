@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 public class HealthControllerFuncTest {
 
     @Test
-    public void makeSureThatGoogleIsUp() {
+    public void checkHealthReturns200() {
         given()
                 .when()
                 .get("http://localhost:8080/health")

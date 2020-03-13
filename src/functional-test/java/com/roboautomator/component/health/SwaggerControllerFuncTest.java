@@ -8,14 +8,14 @@ import static io.restassured.RestAssured.given;
 public class SwaggerControllerFuncTest {
 
     @Test
-    public void makeSureThatGoogleIsUp() {
+    public void checkThatSwaggerisReachableFromRootPage() {
         given()
                 .when()
-                .post("http://localhost:8080/")
+                .get("http://localhost:8080/")
                 .then()
                 .statusCode(
                         Matchers.allOf(
-                                Matchers.greaterThanOrEqualTo(300),
+                                Matchers.greaterThanOrEqualTo(200),
                                 Matchers.lessThan(400)));
     }
 }
