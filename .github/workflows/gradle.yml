@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  test-with-coverage:
+  test:
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout Sourcecode
@@ -18,11 +18,10 @@ jobs:
         run: chmod +x gradlew
       - name: Test with Coverage
         run: ./gradlew jacocoUnitTestReport
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
+      - name: Analysis with SonarCloud
+        run: ./gradlew sonarqube
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          - GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
@@ -37,7 +36,7 @@ jobs:
         uses: actions/checkout@v1
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Test with Coverage
+      - name: Functional Tests
         run: ./gradlew functionalTest
   deploy-docker:
     needs: [test-with-coverage, functional-tests]
