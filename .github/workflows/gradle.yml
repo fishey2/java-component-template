@@ -18,6 +18,8 @@ jobs:
         run: chmod +x gradlew
       - name: Test with Coverage
         run: ./gradlew jacocoUnitTestReport
+      - name: Analyse with SonarCloud
+        run: ./gradlew sonar
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
