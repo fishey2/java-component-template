@@ -4,9 +4,19 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - README.md
+      - gradlew.bat
+      - LICENSE
+      - docs/*
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - README.md
+      - gradlew.bat
+      - LICENSE
+      - docs/*
 
 jobs:
   test:
