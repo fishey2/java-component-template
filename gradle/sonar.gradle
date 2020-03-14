@@ -3,6 +3,6 @@ sonarqube {
         property "sonar.projectKey", "fishey2_java-component-template"
         property "sonar.organization", "fishey2"
         property "sonar.host.url", "https://sonarcloud.io"
-        property "sonar.login", "68c07855a5eebd70047e32071ae0b645556feaac"
+        property "sonar.login", System.getenv("KEY_PASSWORD")
     }
 }

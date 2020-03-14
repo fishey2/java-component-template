@@ -6,8 +6,7 @@ test {
     }
 }
 
-task jacocoUnitTestReport(type: JacocoReport){
-    group "verification"
+jacocoTestReport {
     sourceSets sourceSets.main
     executionData test
     reports {
@@ -17,4 +16,4 @@ task jacocoUnitTestReport(type: JacocoReport){
     }
 }
 
-jacocoUnitTestReport.dependsOn test
+jacocoTestReport.dependsOn test
