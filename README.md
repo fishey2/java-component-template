@@ -8,7 +8,7 @@
 
 Component template project for Java including Spring Boot 2 and JUnit
 
-[Documentation](https://fishey2.github.io/java-component-template) for this, including testing Spring Boot 2 with JUnit5 and Mockito.
+[Documentation](https://github.com/fishey2/java-component-template/wiki) for this, including testing Spring Boot 2 with JUnit5 and Mockito.
 
 ## Dependencies
 
