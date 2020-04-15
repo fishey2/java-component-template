@@ -11,5 +11,3 @@ dockerCompose {
 functionalComposeBuild.dependsOn(bootJar)
 functionalComposeUp.dependsOn(bootJar)
 functionalTest.dependsOn(functionalComposeUp)
-
-//test.dependsOn(composeUp)

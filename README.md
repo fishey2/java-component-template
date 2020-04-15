@@ -98,3 +98,42 @@ services:
 ## Apache Zookeeper
 
 https://zookeeper.apache.org/
+
+Spring + Kafka: https://docs.spring.io/spring-kafka/reference/html/
+
+### Docker Image (Kafka/Zookeeper)
+
+Finding the executables for kafka:
+
+```bash
+$ docker ps
+
+$ docker exec -it <id:kafka> /bin/bash
+
+I have no name!@<id>$ cd opt/bitnami/kafka/bin
+```
+
+Creating new topic:
+```bash
+I have no name!@<id>$ kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+
+I have no name!@<id>$ kafka-topics.sh --list --bootstrap-server localhost:9092
+test
+```
+
+Producing messages on topic:
+```bash
+I have no name!@<id>$ kafka-console-producer.sh --broker-list localhost:9092 --topic test
+> Hello!
+> Hello Again!
+
+# Consuming messages
+I have no name!@<id>$ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+Hello!
+Hello Again!
+
+Processed a total of 2 messages
+```
+
+Configuring Spring Boot with gradle https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/gradle-plugin/reference/html/
+

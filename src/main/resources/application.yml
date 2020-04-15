@@ -1,0 +1,9 @@
+server:
+  port: 9000
+
+spring:
+  kafka:
+    consumer:
+      group-id: tpd-loggers
+      auto-offset-reset: earliest
+    bootstrap-servers: 192.168.176.3:9092
