@@ -16,8 +16,8 @@ The following dependencies are used within this project,
 
 | Dependency               | Version        | Usage                                              | Licence            |
 |--------------------------|----------------|:---------------------------------------------------|--------------------|
-| spring-boot-dependencies | v2.2.2.RELEASE | Dependencies for Spring Boot 2                     | Apache 2.0         |
-| spring-boot-starter-web  | v2.0.5.RELEASE | Spring Boot Web Starter for Configuring Spring App | Apache 2.0         |
+| spring-boot-dependencies | v2.2.6.RELEASE | Dependencies for Spring Boot 2                     | Apache 2.0         |
+| spring-boot-starter-web  | v2.2.6.RELEASE | Spring Boot Web Starter for Configuring Spring App | Apache 2.0         |
 | logback-classic          | v1.2.3         | Logging framework                                  | EPL 1.0 & LGPL 2.1 |
 | springfox-swagger2       | v2.9.2         | API Auto Documentation                             | Apache 2.0         |
 | springfox-swagger-ui     | v2.9.2         | Serves the Swagger Documentation on the Spring App | Apache 2.0         |
@@ -27,7 +27,7 @@ The following dependencies are used within this project,
 | Dependency               | Version        | Usage                                                 | Licence    |
 |--------------------------|----------------|-------------------------------------------------------|------------|
 | junit-jupiter            | v5.5.2         | Testing Framework                                     | EPL 2.0    |
-| spring-boot-starter-test | v2.0.5.RELEASE | Contains MockMVC for testing Spring Boot applications | Apache 2.0 |
+| spring-boot-starter-test | v2.2.6.RELEASE | Contains MockMVC for testing Spring Boot applications | Apache 2.0 |
 | mockito-core             | v2.22.0        | Java test mocking libraries                           | MIT        |
 | rest-assured             | v4.1.2         | API Test Framework                                    | Apache 2.0 |
 | json-path                | v4.1.2         | JsonPath Implementation                               | Apache 2.0 |
@@ -40,7 +40,7 @@ The following dependencies are used within this project,
 | java                            | -             | Gradle Java Plugin                  | 
 | idea                            | -             | Gradle IntelliJ Plugin              |
 | jacoco                          | -             | Code coverage plugin                |
-| org.springframework.boot        | 2.0.5.RELEASE | Spring Boot plugin                  | 
+| org.springframework.boot        | 2.2.6.RELEASE | Spring Boot plugin                  | 
 | io.spring.dependency-management | 1.0.7.RELEASE | Spring Dependency Management plugin |
 | com.avast.gradle.docker-compose | 0.10.7        | Docker Compose Gradle plugin        |
 | org.sonarqube                   | v2.8          | SonarQube plugin                    | 
@@ -73,3 +73,29 @@ The following dependencies are used within this project,
 # Stopping the docker container
 (projectRoot)$ docker-compose down
 ```
+
+## Active MQ
+
+Adding active mq to docker-compose file
+
+```bash
+# Before running any tests, run
+$ docker-compose up &
+```
+
+The default login details for the container admin portal on `8161` are `username = admin` and `password = admin`.
+
+Connections can be made on `61616`.
+
+Although, use the protocol specific ports:
+
+| Protocol | Port     |
+|----------|----------|
+| MQTT     | 1883     |
+| AMQP     | 5672     |
+| Stomp    | 61613    |
+| OPENWIRE | 61616    |
+| Any TCP  | 61616    |
+
+
+JMS Messaging

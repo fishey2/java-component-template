@@ -6,7 +6,8 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 
 import static com.roboautomator.component.config.SwaggerConfig.*;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class SwaggerConfigTest {
 

@@ -1,9 +1,8 @@
 version: "3.7"
 services:
-  component:
-    image: docker.pkg.github.com/fishey2/java-component-template/component:0.1-SNAPSHOT
-    build:
-      context: .
-      dockerfile: docker/component/Dockerfile
+  activemq:
+    image: rmohr/activemq:5.15.9-alpine
     ports:
-      - 8080:8080
+      # AMQP Port (61616 is generic)
+      - 5672:5672
+      - 8161:8161
