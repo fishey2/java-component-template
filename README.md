@@ -73,3 +73,28 @@ The following dependencies are used within this project,
 # Stopping the docker container
 (projectRoot)$ docker-compose down
 ```
+
+# Apache Kafka Integration
+
+```
+version: '2'
+services:
+ zookeeper:
+   image: wurstmeister/zookeeper
+   ports:
+     - "2181:2181"
+ kafka:
+   build: .
+   ports:
+     - "9092"
+   environment:
+     KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100 (DockerIP)
+        OR
+     HOSTNAME_COMMAND: "route -n | awk '/UG[ \t]/{print $$2}'"
+     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+   volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+```
+## Apache Zookeeper
+
+https://zookeeper.apache.org/

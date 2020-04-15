@@ -1,5 +1,12 @@
 version: "3.7"
 services:
+  component:
+    image: docker.pkg.github.com/fishey2/java-component-template/component:0.1-SNAPSHOT
+    build:
+      context: .
+      dockerfile: docker/component/Dockerfile
+    ports:
+      - 8080:8080
   zookeeper:
     image: wurstmeister/zookeeper
     ports:

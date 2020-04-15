@@ -1,7 +1,6 @@
 dockerCompose {
-
     functional {
-        useComposeFiles = ['docker-compose.yml']
+        useComposeFiles = ['docker-compose-functional.yml']
         startedServices = ['component']
         buildBeforeUp = true
 
