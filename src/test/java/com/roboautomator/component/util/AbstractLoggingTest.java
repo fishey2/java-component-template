@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  *
  * @param <T> the type T of the ClassUnderTest
  */
-public class AbstractLoggingTest<T> {
+public abstract class AbstractLoggingTest<T> {
 
     private ListAppender<ILoggingEvent> loggingEventListAppender;
 
