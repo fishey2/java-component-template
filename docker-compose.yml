@@ -3,6 +3,5 @@ services:
   activemq:
     image: rmohr/activemq:5.15.9-alpine
     ports:
-      # AMQP Port (61616 is generic)
-      - 5672:5672
+      - 61616:61616
       - 8161:8161

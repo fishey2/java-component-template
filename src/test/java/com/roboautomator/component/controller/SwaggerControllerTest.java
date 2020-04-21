@@ -21,6 +21,7 @@ public class SwaggerControllerTest {
 
     @Autowired
     WebApplicationContext wac;
+
     private MockMvc mockMvc;
 
     @BeforeEach

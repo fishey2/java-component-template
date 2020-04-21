@@ -8,7 +8,9 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@EnableSwagger2
 @Configuration
 public class SwaggerConfig {
 
@@ -28,7 +30,6 @@ public class SwaggerConfig {
     }
 
     ApiInfo apiEndPointsInfo() {
-
         return new ApiInfoBuilder().title(APPLICATION_NAME)
                 .description(APPLICATION_DESCRIPTION)
                 .version(APPLICATION_VERSION)

@@ -11,8 +11,6 @@ plugins {
 group 'com.roboautomator'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
 }
@@ -26,7 +24,7 @@ dependencies {
 
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
-    testImplementation('org.mockito:mockito-core:2.22.0')
+    testImplementation('org.mockito:mockito-core:2.24.0')
     testImplementation('io.rest-assured:rest-assured:4.1.2')
     testImplementation('io.rest-assured:json-path:4.1.2')
     testImplementation('io.rest-assured:xml-path:4.1.2')
@@ -51,8 +49,8 @@ tasks.withType(JavaCompile) {
 
 configurations.all {
     exclude group:'junit', module:'junit'
-    exclude group: 'org.junit.vintage', module:'junit-vintage-engine'
+    exclude group:'org.junit.vintage', module:'junit-vintage-engine'
     exclude group:'org.mockito', module:'mockito-all'
     exclude group:'org.slf4j', module:'slf4j-log4j12'
-    exclude group: 'org.springframework.boot', module:'spring-boot-starter-logging'
+    exclude group:'org.springframework.boot', module:'spring-boot-starter-logging'
 }
