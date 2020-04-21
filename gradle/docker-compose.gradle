@@ -1,5 +1,11 @@
 dockerCompose {
 
+    useComposeFiles = ['docker-compose.yml']
+    startedServices = ['activemq']
+    buildBeforeUp = true
+
+    removeImages = "Local" // Other accepted values are: "All" and "Local"
+
     functional {
         useComposeFiles = ['docker-compose-test.yml']
         startedServices = ['component']
@@ -12,5 +18,7 @@ dockerCompose {
 functionalComposeBuild.dependsOn(bootJar)
 functionalComposeUp.dependsOn(bootJar)
 functionalTest.dependsOn(functionalComposeUp)
+functionalTest.finalizedBy(functionalComposeDownForced)
 
-//test.dependsOn(composeUp)
+test.dependsOn(composeUp)
+test.finalizedBy(composeDownForced)

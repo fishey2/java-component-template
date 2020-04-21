@@ -37,7 +37,7 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./build/reports/jacoco/jacocoUnitTestReport/jacocoUnitTestReport.xml
+          file: ./build/reports/jacoco/test/jacocoUnitTestReport.xml
           flags: unittests
           name: codecov-umbrella
   functional-tests:
