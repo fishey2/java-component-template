@@ -31,8 +31,7 @@ The following dependencies are used within this project,
 | mockito-core             | v2.22.0        | Java test mocking libraries                           | MIT        |
 | rest-assured             | v4.1.2         | API Test Framework                                    | Apache 2.0 |
 | json-path                | v4.1.2         | JsonPath Implementation                               | Apache 2.0 |
-| xml-path                 | v4.1.2         | XmlPath Implementation                                | Apache 2.0 |
-| 
+| xml-path                 | v4.1.2         | XmlPath Implementation                                | Apache 2.0 | 
 ### Plugins
 
 | Plugin                          | Version       | Usage                               |
@@ -73,29 +72,23 @@ The following dependencies are used within this project,
 # Stopping the docker container
 (projectRoot)$ docker-compose down
 ```
+## Reference Implementations
 
-## Active MQ
+A list of Reference Implementations
+- [Testing](docs/testing/index.md)
+- [Messaging](docs/messaging/activemq.md)
 
-Adding active mq to docker-compose file
+## Developing
+
+### Running Tests
 
 ```bash
-# Before running any tests, run
-$ docker-compose up &
+
+// Running Unit and Integration Tests from CLI
+./gradlew test
+
+// Running Functional Tests from CLI
+./gradlew functionalTest
 ```
 
-The default login details for the container admin portal on `8161` are `username = admin` and `password = admin`.
-
-Connections can be made on `61616`.
-
-Although, use the protocol specific ports:
-
-| Protocol | Port     |
-|----------|----------|
-| MQTT     | 1883     |
-| AMQP     | 5672     |
-| Stomp    | 61613    |
-| OPENWIRE | 61616    |
-| Any TCP  | 61616    |
-
-
-JMS Messaging
+The functional tests will compile, build docker container, wait for service, run docker container, run tests, tear down docker.
