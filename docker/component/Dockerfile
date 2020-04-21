@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk13:x86_64-alpine-jre-13.0.1_9
+FROM adoptopenjdk/openjdk13:jdk-13.0.2_8-alpine
 
 VOLUME /tmp
 ARG JAR_FILE=build/libs/*.jar
