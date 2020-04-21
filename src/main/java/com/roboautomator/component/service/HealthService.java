@@ -12,7 +12,7 @@ public class HealthService {
         this.health = health;
     }
 
-    public Boolean isHealthOk() {
+    public boolean isHealthOk() {
         return health.isHealthOk();
     }
 
