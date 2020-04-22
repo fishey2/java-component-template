@@ -12,6 +12,9 @@ import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 @Configuration
 public class ActiveMQConfig implements QueueConfig {
 
@@ -30,6 +33,8 @@ public class ActiveMQConfig implements QueueConfig {
         activeMQConnectionFactory.setBrokerURL(brokerUrl);
         activeMQConnectionFactory.setUserName(user);
         activeMQConnectionFactory.setPassword(password);
+
+        activeMQConnectionFactory.setTrustedPackages(Collections.singletonList("com.roboautomator.component.model"));
 
         return activeMQConnectionFactory;
     }
