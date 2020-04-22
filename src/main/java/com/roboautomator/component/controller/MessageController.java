@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jms.JmsException;
 import org.springframework.web.bind.annotation.*;
 
+import static com.roboautomator.component.util.StringHelper.cleanString;
+
 @RestController
 @RequestMapping("/message")
 public class MessageController {
@@ -22,6 +24,8 @@ public class MessageController {
 
     @PostMapping
     public ResponseEntity<String> sendMessageToQueue(@RequestBody String message) {
+
+        message = cleanString(message);
 
         log.info("Received request to send the message \"{}\" to queue", message);
 
