@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import javax.jms.Session;
 import javax.jms.Message;
 
+import static com.roboautomator.component.util.StringHelper.cleanString;
+
 /**
  * <p><b>Simple consumer for ActiveMQ</b></p>
  *
@@ -37,14 +39,14 @@ public class ActiveMQConsumer implements QueueConsumer<String> {
     public void handleMessage(@Payload String message, @Headers MessageHeaders headers,
                                Message rawMessage, Session session) {
 
-        log.info("received <" + message + ">");
+        log.info("received <{}>", cleanString(message));
 
         log.info("- - - - - - - - - - - - - - - - - - - - - - - -");
         log.info("######          Message Details           #####");
         log.info("- - - - - - - - - - - - - - - - - - - - - - - -");
-        log.info("headers: " + headers);
-        log.info("rawMessage: " + rawMessage);
-        log.info("session: " + session);
+        log.info("headers: {}", cleanString(headers.toString()));
+        log.info("rawMessage: {}", cleanString(rawMessage.toString()));
+        log.info("session: {}", cleanString(session.toString()));
         log.info("- - - - - - - - - - - - - - - - - - - - - - - -");
     }
 }
