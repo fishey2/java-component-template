@@ -33,20 +33,21 @@ public class ActiveMQConsumer implements QueueConsumer<String> {
     private static Logger log = LoggerFactory.getLogger(ActiveMQConsumer.class);
 
     private static final String QUEUE_NAME = "testQueue";
-
+    private static final String LOG_SEPARATOR = "- - - - - - - - - - - - - - - - - - - - - - - -";
     @Override
     @JmsListener(destination = QUEUE_NAME)
     public void handleMessage(@Payload String message, @Headers MessageHeaders headers,
                                Message rawMessage, Session session) {
 
-        log.info("received <{}>", cleanString(message));
+        message = cleanString(message);
+        log.info("received <{}>", message);
 
-        log.info("- - - - - - - - - - - - - - - - - - - - - - - -");
+        log.info(LOG_SEPARATOR);
         log.info("######          Message Details           #####");
-        log.info("- - - - - - - - - - - - - - - - - - - - - - - -");
-        log.info("headers: {}", cleanString(headers.toString()));
-        log.info("rawMessage: {}", cleanString(rawMessage.toString()));
-        log.info("session: {}", cleanString(session.toString()));
-        log.info("- - - - - - - - - - - - - - - - - - - - - - - -");
+        log.info(LOG_SEPARATOR);
+        log.info("headers: {}", headers);
+        log.info("rawMessage: {}", rawMessage);
+        log.info("session: {}", session);
+        log.info(LOG_SEPARATOR);
     }
 }
