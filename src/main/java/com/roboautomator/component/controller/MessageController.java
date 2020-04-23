@@ -1,6 +1,6 @@
 package com.roboautomator.component.controller;
 
-import com.roboautomator.component.config.message.activemq.producer.ActiveMQProducer;
+import com.roboautomator.component.service.message.activemq.producer.ActiveMQProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

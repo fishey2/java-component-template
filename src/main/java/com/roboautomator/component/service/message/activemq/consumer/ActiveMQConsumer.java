@@ -1,6 +1,6 @@
-package com.roboautomator.component.config.message.activemq.consumer;
+package com.roboautomator.component.service.message.activemq.consumer;
 
-import com.roboautomator.component.config.message.QueueConsumer;
+import com.roboautomator.component.service.message.QueueConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;

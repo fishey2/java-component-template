@@ -2,7 +2,7 @@ package com.roboautomator.component.controller;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import com.roboautomator.component.config.message.activemq.producer.ActiveMQProducer;
+import com.roboautomator.component.service.message.activemq.producer.ActiveMQProducer;
 
 import com.roboautomator.component.util.AbstractLoggingTest;
 import org.junit.jupiter.api.BeforeEach;

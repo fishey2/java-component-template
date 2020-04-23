@@ -3,5 +3,6 @@ spring:
     broker-url: tcp://localhost:61616
     user: admin
     password: admin
-mq:
-  queueName: testQueue
+  swagger:
+    endpoint: /swagger-ui.html
+

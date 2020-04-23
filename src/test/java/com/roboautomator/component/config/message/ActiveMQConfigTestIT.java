@@ -1,9 +1,9 @@
 package com.roboautomator.component.config.message;
 
-import com.roboautomator.component.config.message.activemq.ActiveMQConfig;
-import com.roboautomator.component.config.message.activemq.consumer.ActiveMQConsumer;
+import com.roboautomator.component.service.message.activemq.ActiveMQConfig;
+import com.roboautomator.component.service.message.activemq.consumer.ActiveMQConsumer;
 
-import com.roboautomator.component.config.message.activemq.producer.ActiveMQProducer;
+import com.roboautomator.component.service.message.activemq.producer.ActiveMQProducer;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.junit.jupiter.api.Test;
@@ -33,18 +33,6 @@ public class ActiveMQConfigTestIT {
 
     @Autowired
     private ActiveMQConfig activeMQConfig;
-
-    @Test
-    public void testConsumerReturnsActiveMQConsumer() {
-        assertThat(activeMQConfig.consumer().getClass().getSimpleName())
-                .isEqualTo(ActiveMQConsumer.class.getSimpleName());
-    }
-
-    @Test
-    public void testProducerReturnsActiveMQConsumer() {
-        assertThat(activeMQConfig.producer().getClass().getSimpleName())
-                .isEqualTo(ActiveMQProducer.class.getSimpleName());
-    }
 
     @Test
     public void testJmsTemplateReturnsJmsTemplate() {

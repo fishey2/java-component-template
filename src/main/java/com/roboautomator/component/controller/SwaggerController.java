@@ -1,5 +1,6 @@
 package com.roboautomator.component.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import springfox.documentation.annotations.ApiIgnore;
@@ -8,10 +9,11 @@ import springfox.documentation.annotations.ApiIgnore;
 @Controller
 public class SwaggerController {
 
-    private static final String REDIRECT_PATH = "/swagger-ui.html";
+    @Value("${spring.swagger.endpoint}")
+    private String redirectPath;
 
     @GetMapping
     public String redirectRootToSwaggerDocs() {
-        return "redirect:" + REDIRECT_PATH;
+        return "redirect:" + redirectPath;
     }
 }

@@ -1,18 +1,15 @@
-package com.roboautomator.component.config.message.activemq;
+package com.roboautomator.component.service.message.activemq;
 
 import com.roboautomator.component.config.message.QueueConfig;
-import com.roboautomator.component.config.message.activemq.consumer.ActiveMQConsumer;
-import com.roboautomator.component.config.message.activemq.producer.ActiveMQProducer;
+
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 @Configuration
@@ -57,16 +54,6 @@ public class ActiveMQConfig implements QueueConfig {
     @Override
     public JmsTemplate jmsTemplate() {
         return new JmsTemplate(getConnectionFactory());
-    }
-
-    @Override
-    public ActiveMQProducer producer() {
-        return new ActiveMQProducer(jmsTemplate());
-    }
-
-    @Override
-    public ActiveMQConsumer consumer() {
-        return new ActiveMQConsumer();
     }
 
 }

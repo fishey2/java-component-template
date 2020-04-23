@@ -30,16 +30,5 @@ public interface QueueConfig {
      */
     JmsTemplate jmsTemplate();
 
-    /**
-     * Creates new producer
-     * @return the configured {@link QueueProducer}
-     */
-    QueueProducer<?> producer();
-
-    /**
-     * Creates new sexy consumer
-     * @return the configured {@link QueueConsumer}
-     */
-    QueueConsumer<?> consumer();
 }
 

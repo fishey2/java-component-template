@@ -29,6 +29,8 @@ dependencies {
     testImplementation('io.rest-assured:rest-assured:4.1.2')
     testImplementation('io.rest-assured:json-path:4.1.2')
     testImplementation('io.rest-assured:xml-path:4.1.2')
+
+    annotationProcessor group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
 }
 
 apply from: 'gradle/unit-test.gradle'

@@ -1,7 +1,7 @@
-package com.roboautomator.component.config.message.activemq.producer;
+package com.roboautomator.component.service.message.activemq.producer;
 
-import com.roboautomator.component.config.message.activemq.ActiveMQConfig;
-import com.roboautomator.component.config.message.QueueProducer;
+import com.roboautomator.component.service.message.activemq.ActiveMQConfig;
+import com.roboautomator.component.service.message.QueueProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;

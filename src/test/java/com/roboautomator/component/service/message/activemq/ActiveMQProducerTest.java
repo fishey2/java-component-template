@@ -1,7 +1,7 @@
-package com.roboautomator.component.config.message.activemq;
+package com.roboautomator.component.service.message.activemq;
 
 import ch.qos.logback.classic.spi.ILoggingEvent;
-import com.roboautomator.component.config.message.activemq.producer.ActiveMQProducer;
+import com.roboautomator.component.service.message.activemq.producer.ActiveMQProducer;
 import com.roboautomator.component.util.AbstractLoggingTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

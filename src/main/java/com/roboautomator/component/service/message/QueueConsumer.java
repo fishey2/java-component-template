@@ -1,4 +1,4 @@
-package com.roboautomator.component.config.message;
+package com.roboautomator.component.service.message;
 
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
