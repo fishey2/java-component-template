@@ -2,6 +2,10 @@ package com.roboautomator.component.util;
 
 public class StringHelper {
 
+    private StringHelper() {
+        // Empty private constructor
+    }
+
     /**
      * <p>Removes the following characters to protect users from log injection:</p>
      * <ul>

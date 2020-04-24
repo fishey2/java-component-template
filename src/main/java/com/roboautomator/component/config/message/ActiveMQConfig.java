@@ -1,7 +1,5 @@
 package com.roboautomator.component.config.message;
 
-import com.roboautomator.component.config.message.QueueConfig;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
