@@ -1,4 +1,4 @@
-package com.roboautomator.component.service.message.activemq;
+package com.roboautomator.component.config.message;
 
 import com.roboautomator.component.config.message.QueueConfig;
 

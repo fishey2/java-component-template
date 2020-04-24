@@ -34,6 +34,7 @@ public class ActiveMQConsumer implements QueueConsumer<String> {
 
     private static final String QUEUE_NAME = "testQueue";
     private static final String LOG_SEPARATOR = "- - - - - - - - - - - - - - - - - - - - - - - -";
+
     @Override
     @JmsListener(destination = QUEUE_NAME)
     public void handleMessage(@Payload String message, @Headers MessageHeaders headers,

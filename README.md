@@ -57,12 +57,12 @@ TODO List (master):
 - [ ] Spike for Canary Updates/Build
 - [ ] Pre/Post Git Hooks? Secrets?
 - [ ] Migrate from GitHub Workflow (move to branch) use CircleCI (default) instead 
-- [ ] Update project badges
+- [X] Update project badges
 - [ ] Logging Correlation (Microservices)
 - [ ] Logging Middleware for HttpRequests and Responses
 - [ ] Authorisation Middleware
 - [ ] Update JMS implementation to use transactions instead
-    - [ ] Check if uses by default
+    - [ ] Configure and use atomikos 
 - [X] Fix issue with dockerComposeDown not working after testing
     - [ ] Writeup post of Gradle 7 and ordering (move docs to branch)
 - [ ] Working pipeline for branches and pull requests

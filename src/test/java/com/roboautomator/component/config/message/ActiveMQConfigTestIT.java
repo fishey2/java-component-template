@@ -1,10 +1,5 @@
 package com.roboautomator.component.config.message;
 
-import com.roboautomator.component.service.message.activemq.ActiveMQConfig;
-import com.roboautomator.component.service.message.activemq.consumer.ActiveMQConsumer;
-
-import com.roboautomator.component.service.message.activemq.producer.ActiveMQProducer;
-
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

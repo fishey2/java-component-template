@@ -5,4 +5,3 @@ spring:
     password: admin
   swagger:
     endpoint: /swagger-ui.html
-
