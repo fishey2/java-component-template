@@ -1,4 +1,4 @@
-name: Java Component Template | Master
+name: Java Component Template ${{ github.ref }}
 on:
   push:
     branches:
