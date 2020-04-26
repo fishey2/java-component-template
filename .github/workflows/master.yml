@@ -1,4 +1,4 @@
-name: Java Component Template ${{ github.ref }}
+name: Java Component Template | $GITHUB_REF
 on:
   push:
     branches:
