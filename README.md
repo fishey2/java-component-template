@@ -204,4 +204,18 @@ A list of Reference Implementations
 // Running Functional Tests from CLI
 ./gradlew functionalTest
 ```
+### CodeCov
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./build/reports/jacoco/test/jacocoUnitTestReport.xml
+          flags: unittests
+          name: codecov-umbrella
+
+## SPring profiles
+
+Set env variable
+
+`SPRING_PROFILES_ACTIVE=test` 

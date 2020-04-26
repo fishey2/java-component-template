@@ -1,7 +1,32 @@
 spring:
-  activemq:
-    broker-url: tcp://127.0.0.1:61616
-    user: admin
-    password: admin
+  profiles:
+    active: "dev"
   swagger:
     endpoint: /swagger-ui.html
+
+---
+
+spring:
+  profiles: dev
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+
+---
+
+spring:
+  profiles: test
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+
+---
+
+spring:
+  profiles: prod
+  activemq:
+    broker-url: tcp://0.0.0.0:61616
+    user: admin
+    password: admin
