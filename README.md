@@ -56,15 +56,16 @@ TODO List (master):
 - [ ] Separate Unit and Integration tests
 - [ ] Spike for Canary Updates/Build
 - [ ] Pre/Post Git Hooks? Secrets?
-- [ ] Migrate from GitHub Workflow (move to branch) use CircleCI (default) instead 
+    - [ ] Migrate from GitHub Workflow (move to branch) use CircleCI (default) instead
+    - [ ] or travis CI? 
 - [X] Update project badges
 - [ ] Logging Correlation (Microservices)
 - [ ] Logging Middleware for HttpRequests and Responses
 - [ ] Authorisation Middleware
-- [ ] Update JMS implementation to use transactions instead
-    - [ ] Configure and use atomikos 
+- [X] Update JMS implementation to use transactions instead
+    - Done by default for reading and handling the inbound message
 - [X] Fix issue with dockerComposeDown not working after testing
-    - [ ] Writeup post of Gradle 7 and ordering (move docs to branch)
+    - [ ] Writeup post of Gradle 7 and ordering
 - [ ] Working pipeline for branches and pull requests
 
 List of desired parts:

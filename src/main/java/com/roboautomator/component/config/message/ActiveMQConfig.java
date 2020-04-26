@@ -1,6 +1,7 @@
 package com.roboautomator.component.config.message;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.ActiveMQSslConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +23,26 @@ public class ActiveMQConfig implements QueueConfig {
     @Value("${spring.activemq.password}")
     private String password;
 
+    private ActiveMQSslConnectionFactory getSslConnectionFactory() {
+        return new ActiveMQSslConnectionFactory();
+    }
+
+    /**
+     * <p><b>Strategy:</b> If URL contains ssl then it will use {@link ActiveMQSslConnectionFactory} instead of
+     * {@link ActiveMQConnectionFactory}.</p>
+     *
+     * <p><b>Trusted Packages:</b>
+     * <ul>
+     *     <li>com.roboautomator.component.model</li>
+     * </ul></p>
+     *
+     * @return the {@link ActiveMQConnectionFactory} to be used.
+     */
     public ActiveMQConnectionFactory configureActiveMQConnectionFactory() {
-        ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
+
+        ActiveMQConnectionFactory activeMQConnectionFactory = brokerUrl.contains("ssl")
+                ? getSslConnectionFactory()
+                : new ActiveMQConnectionFactory();
 
         activeMQConnectionFactory.setBrokerURL(brokerUrl);
         activeMQConnectionFactory.setUserName(user);

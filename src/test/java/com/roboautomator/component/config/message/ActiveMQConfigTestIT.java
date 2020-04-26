@@ -1,6 +1,7 @@
 package com.roboautomator.component.config.message;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.ActiveMQSslConnectionFactory;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -31,14 +32,14 @@ public class ActiveMQConfigTestIT {
 
     @Test
     public void testJmsTemplateReturnsJmsTemplate() {
-        assertThat(activeMQConfig.jmsTemplate().getClass().getSimpleName())
-                .isEqualTo(JmsTemplate.class.getSimpleName());
+        assertThat(activeMQConfig.jmsTemplate().getClass())
+                .isEqualTo(JmsTemplate.class);
     }
 
     @Test
     public void testConnectionFactoryReturnsObject() {
-        assertThat(activeMQConfig.configureActiveMQConnectionFactory().getClass().getSimpleName())
-                .isEqualTo(ActiveMQConnectionFactory.class.getSimpleName());
+        assertThat(activeMQConfig.configureActiveMQConnectionFactory().getClass())
+                .isEqualTo(ActiveMQConnectionFactory.class);
     }
 
     @Test
@@ -57,5 +58,13 @@ public class ActiveMQConfigTestIT {
     public void testConnectionFactoryCallsActiveMQWithPassword() {
         assertThat(activeMQConfig.configureActiveMQConnectionFactory().getPassword())
                 .isEqualTo(password);
+    }
+
+    @Test
+    public void testSSLConnectionFactoryUsedWhenURLContainsSSL() {
+        org.springframework.test.util.ReflectionTestUtils
+                .setField(activeMQConfig, "brokerUrl", "tcp+ssl://127.0.0.1:61616");
+
+        assertThat(activeMQConfig.configureActiveMQConnectionFactory().getClass()).isEqualTo(ActiveMQSslConnectionFactory.class);
     }
 }
