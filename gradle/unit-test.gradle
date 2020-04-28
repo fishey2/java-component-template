@@ -4,10 +4,6 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
     }
-
-    jacoco {
-        excludes = ['**/MainApplication*']
-    }
 }
 
 jacocoTestReport {
@@ -20,4 +16,4 @@ jacocoTestReport {
     }
 }
 
-jacocoTestReport.dependsOn test
+test.finalizedBy jacocoTestReport

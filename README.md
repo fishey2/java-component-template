@@ -4,10 +4,6 @@
 
 [![Actions Status](https://github.com/fishey2/java-component-template/workflows/Java%20CI/badge.svg)](https://github.com/fishey2/java-component-template/actions)
 
-## CodeCov Overall
-
-[![codecov](https://codecov.io/gh/fishey2/java-component-template/branch/master/graph/badge.svg?token=BuPjnBJ5YK)](https://codecov.io/gh/fishey2/java-component-template)
-
 ## SonarCloud Overall
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=alert_status)](https://sonarcloud.io/dashboard?id=fishey2_java-component-template)
 
@@ -47,9 +43,8 @@ git pull -m origin with_flyway
 ```
 
 List of branches:
-- with_activemq (WIP to be removed as default)
-- with_kafka (WIP - do not remove)
-- with_amqp (to be renamed as with_rabbitmq - do not remove)
+- [with_codecov](https://github.com/fishey2/java-component-template/tree/with_codecov)
+- [with_kafka](https://github.com/fishey2/java-component-template/tree/with_kafka)
 
 TODO List (master):
 - [ ] Audit? Check for Updates/Dependencies?
@@ -105,17 +100,18 @@ List of desired parts:
     - [X] Rest Assured (Default)
 - [ ] CI/CD
     - [X] Git Workflow (Default)
+    (Default?)
     - [ ] Makefile (with_make)
     - [ ] Dojo (with_dojo)
     - [ ] CircleCI (with_circleci)
-    - [ ] CodeCov (with_codecov)
+    - [X] CodeCov (with_codecov)
     - [ ] GoCD (with_gocd)
     - [X] SonarCloud (Default)
 - [ ] Infrastructure
     - [ ] Terraform (Deploy?)
     - [ ] S3 (with_awss3)
 - [ ] Other
-    - [ ] Lombok (with_lombok)
+    - [ ] Lombok (Default)
 - [ ] Testing
     - [ ] Performance Testing
     - [ ] Load Testing?
@@ -166,8 +162,7 @@ The following dependencies are used within this project,
 | Integration                                                                       | Usage                               |
 |----------------------------------------------------------------------------------|------------------------------------|
 | [GitHub Actions](https://github.com/fishey2/java-component-template/actions)     | Continuous Integration Tool        |
-| [SonarCloud](https://sonarcloud.io/dashboard?id=fishey2_java-component-template) | Code Quality and Security Analysis 
-| [CodeCov](https://codecov.io/gh/fishey2/java-component-template)                 | Test Coverage and Analysis         |
+| [SonarCloud](https://sonarcloud.io/dashboard?id=fishey2_java-component-template) | Code Quality and Security Analysis |
  
 ## Docker
 
