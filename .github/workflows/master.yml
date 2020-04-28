@@ -23,6 +23,11 @@ jobs:
     steps:
       - name: Checkout Sourcecode
         uses: actions/checkout@v2
+      - name: Setup Java Development Environment
+        uses: actions/setup-jdk@master
+        with:
+          version: '11' // The OpenJDK version to make available on the path
+          architecture: 'x64' // defaults to 'x64'
       - name: Setting Gradle Cache
         uses: actions/cache@v1
         with:
