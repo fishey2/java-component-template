@@ -3,27 +3,27 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter"/>
+                <appendLineSeparator>true</appendLineSeparator>
+            </layout>
         </encoder>
     </appender>
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>junit.log</file>
+        <file>build/logging/junit.log</file>
         <append>false</append>
-        <!-- encoders are assigned the type
-             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
-        <encoder>
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>utf8</charset>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+                <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter"/>
+                <appendLineSeparator>true</appendLineSeparator>
+            </layout>
         </encoder>
     </appender>
     <root level="INFO">
         <appender-ref ref="FILE" />
         <appender-ref ref="CONSOLE" />
     </root>
-    <!-- We want error logging from this logger to go to an extra appender
-         It still inherits CONSOLE STDOUT from the root logger -->
     <logger name="junit" level="INFO">
         <appender-ref ref="CONSOLE" />
     </logger>
