@@ -24,7 +24,7 @@ jobs:
       - name: Checkout Sourcecode
         uses: actions/checkout@v2
       - name: Setup Java Development Environment
-        uses: actions/setup-jdk@master
+        uses: actions/setup-java@master
         with:
           version: '11'
           architecture: 'x64'
