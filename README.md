@@ -66,7 +66,7 @@ TODO List (master):
     - Done by default for reading and handling the inbound message
 - [X] Fix issue with dockerComposeDown not working after testing
     - [ ] Writeup post of Gradle 7 and ordering
-- [ ] Working pipeline for branches and pull requests
+- [X] Working pipeline for branches and pull requests (GitHub)
 
 List of desired parts:
 - [ ] Build Automation
