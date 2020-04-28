@@ -8,6 +8,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static com.roboautomator.component.util.StringHelper.cleanString;
+
 /**
  * <p>Logging middleware is based on {@link HandlerInterceptorAdapter} and will log the following:{@link HttpServletRequest} before handling.</p>
  * <ul>
@@ -21,7 +23,7 @@ public class LoggingMiddleware extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        log.info(httpServletRequestToString(request));
+        log.info(cleanString(httpServletRequestToString(request)));
         return true;
     }
 

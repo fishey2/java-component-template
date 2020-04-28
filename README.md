@@ -54,6 +54,7 @@ List of branches:
 TODO List (master):
 - [ ] Audit? Check for Updates/Dependencies?
 - [ ] Separate Unit and Integration tests
+
 - [ ] Spike for Canary Updates/Build
 - [ ] Pre/Post Git Hooks? Secrets?
     - [ ] Migrate from GitHub Workflow (move to branch) use CircleCI (default) instead
@@ -68,6 +69,7 @@ TODO List (master):
 - [X] Fix issue with dockerComposeDown not working after testing
     - [ ] Writeup post of Gradle 7 and ordering
 - [X] Working pipeline for branches and pull requests (GitHub)
+- [ ] Create some LoggingHandler that cleans log statements
 
 List of desired parts:
 - [ ] Build Automation

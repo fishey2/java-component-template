@@ -64,6 +64,28 @@ public class LoggingMiddlewareTestIT extends AbstractLoggingTest<LoggingMiddlewa
     }
 
     @Test
+    public void shouldCleanStringForAnyInputsFromHttpServletRequest() {
+        Vector<String> headerNames = new Vector<>();
+        headerNames.add("cleanString");
+
+        doReturn(headerNames.elements()).when(httpServletRequest).getHeaderNames();
+
+        doReturn("val\n\r\tue1").when(httpServletRequest).getHeader("cleanString");
+
+        loggingMiddleware.preHandle(httpServletRequest, httpServletResponse, handlerMethod);
+
+        assertThat(getLoggingEventListAppender().list)
+                .extracting(ILoggingEvent::getMessage)
+                .contains(httpServletRequest.getClass().getSimpleName() + " {"
+                        + "type: " + TEST_METHOD
+                        + ", endpoint: " + TEST_URI
+                        + ", headers: " + "[ cleanString: value1, ]"
+                        + ", contentType: " + TEST_CONTENT_TYPE
+                        + ", contentLength: " + TEST_CONTENT_LENGTH
+                        + "}");
+    }
+
+    @Test
     public void shouldLogRequestWithEmptyArrayWithEmptyHeadersAreSpecified() {
         Vector<String> headerNames = new Vector<>();
         doReturn(headerNames.elements()).when(httpServletRequest).getHeaderNames();
