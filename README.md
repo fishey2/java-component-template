@@ -61,6 +61,7 @@ TODO List (master):
 - [X] Update project badges
 - [ ] Logging Correlation (Microservices)
 - [ ] Logging Middleware for HttpRequests and Responses
+    - [X] HttpServletRequest
 - [ ] Authorisation Middleware
 - [X] Update JMS implementation to use transactions instead
     - Done by default for reading and handling the inbound message

@@ -50,6 +50,21 @@ public class LoggingMiddlewareTestIT extends AbstractLoggingTest<LoggingMiddlewa
 
     @Test
     public void shouldLogRequestWithEmptyArrayWhenNoHeadersAreSpecified() {
+        loggingMiddleware.preHandle(httpServletRequest, httpServletResponse, handlerMethod);
+
+        assertThat(getLoggingEventListAppender().list)
+                .extracting(ILoggingEvent::getMessage)
+                .contains(httpServletRequest.getClass().getSimpleName() + " {"
+                        + "type: " + TEST_METHOD
+                        + ", endpoint: " + TEST_URI
+                        + ", headers: " + "[ ]"
+                        + ", contentType: " + TEST_CONTENT_TYPE
+                        + ", contentLength: " + TEST_CONTENT_LENGTH
+                        + "}");
+    }
+
+    @Test
+    public void shouldLogRequestWithEmptyArrayWithEmptyHeadersAreSpecified() {
         Vector<String> headerNames = new Vector<>();
         doReturn(headerNames.elements()).when(httpServletRequest).getHeaderNames();
 

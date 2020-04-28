@@ -41,12 +41,14 @@ public class LoggingMiddleware extends HandlerInterceptorAdapter {
 
         stringBuilder.append("[ ");
 
-        request.getHeaderNames().asIterator().forEachRemaining(headerName -> {
-            stringBuilder.append(headerName);
-            stringBuilder.append(": ");
-            stringBuilder.append(request.getHeader(headerName));
-            stringBuilder.append(", ");
-        });
+        if(request.getHeaderNames() != null) {
+            request.getHeaderNames().asIterator().forEachRemaining(headerName -> {
+                stringBuilder.append(headerName);
+                stringBuilder.append(": ");
+                stringBuilder.append(request.getHeader(headerName));
+                stringBuilder.append(", ");
+            });
+        }
 
         stringBuilder.append("]");
 
