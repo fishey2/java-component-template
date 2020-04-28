@@ -6,7 +6,7 @@
 
 ## CodeCov Overall
 
-[![codecov](https://codecov.io/gh/fishey2/java-component-template/branch/master/graph/badge.svg?token=BuPjnBJ5YK)](https://codecov.io/gh/fishey2/java-component-template)
+[![codecov](https://codecov.io/gh/fishey2/java-component-template/branch/with_codecov/graph/badge.svg)](https://codecov.io/gh/fishey2/java-component-template)
 
 ## SonarCloud Overall
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=alert_status)](https://sonarcloud.io/dashboard?id=fishey2_java-component-template)
