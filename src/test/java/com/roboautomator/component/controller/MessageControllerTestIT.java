@@ -35,7 +35,7 @@ public class MessageControllerTestIT {
     }
 
     @Test
-    public void getHello() {
+    public void canSendMessageToMessageQueue() {
 
         ResponseEntity<String> response = template.postForEntity(base.toString(),
                 TEST_MESSAGE, String.class);
