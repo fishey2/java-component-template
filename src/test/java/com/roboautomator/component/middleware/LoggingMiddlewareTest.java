@@ -159,6 +159,8 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
         mockHttpServletRequest();
         mockHttpServletResponse();
 
+        doReturn(null).when(httpServletResponse).getHeaderNames();
+
         loggingMiddleware.postHandle(httpServletRequest, httpServletResponse, handlerMethod, null);
 
         assertThat(getLoggingEventListAppender().list)
