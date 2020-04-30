@@ -48,6 +48,16 @@ List of branches:
 
 ## Testing
 
+Currently Implemented Quality Gates:
+
+| Gate Number | Description                  | Condition            |
+|------------:|------------------------------|----------------------|
+|           1 | Unit Tests                   | 100% PASS            |
+|           2 | Integration Tests            | 100% PASS            |
+|           3 | Jacoco (Code Coverage)       | 100% BRANCH COVERAGE |
+|           4 | SonarCloud (Static Analysis) | NOT IMPLEMENTED      |
+|           5 | Functional Tests             | 100% PASS            |
+
 ### Development
 
 For development, it is suggested that you run using Gradle and bring up docker yourself.
