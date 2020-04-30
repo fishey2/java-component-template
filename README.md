@@ -33,57 +33,79 @@ implementations for various things on-top of the master branch.
 
 ```bash
 // Pull in the reference implementation for ActiveMQ
-git pull -m origin with_activemq
+git pull origin with_activemq
 
 // Pull in the reference implementation for PostgreSQL
-git pull -m origin with_postgresql
+git pull origin with_postgresql
 
 // Pull in the reference implementation for Flyway DB Migrations
-git pull -m origin with_flyway
+git pull origin with_flyway
 ```
 
 List of branches:
 - [with_codecov](https://github.com/fishey2/java-component-template/tree/with_codecov)
 - [with_kafka](https://github.com/fishey2/java-component-template/tree/with_kafka)
 
-## Docker
+## Testing
+
+### Development
+
+For development, it is suggested that you run using Gradle and bring up docker yourself.
 
 ```bash
+$ docker-compose up -d
 
-# Compile first
-./gradlew clean build
+$ gradle test
 
-# Building the docker container
-(projectRoot)$ docker-compose build
-
--> This will generate a container docker.pkg.github.com/fishey2/java-component-template/component:0.1-SNAPSHOT
-
-# Running the docker container
-(projectRoot)$ docker-compose up &
-
--> This will launch the service on port 8080
-
-# Stopping the docker container
-(projectRoot)$ docker-compose down
+$ docker-compose down
 ```
+
+### Unit/Integration
+
+To run the unit/integration tests
+
+```bash
+$ make test
+```
+
+### Functional
+
+For functional tests, you should use make, which will build the application and docker container
+
+```bash
+$ make testFunctional
+```
+
+This runs the equivalent of
+```bash
+
+# Creates java executable
+$ ./gradlew bootJar
+
+# Builds the docker container
+$ docker-compose -f docker-compose-test.yml build
+
+# Launches the docker container
+$ docker-compose -f docker-compose-test.yml up -d
+
+# Waits for service locally
+./scripts/wait-for-url.sh http://localhost:8080
+
+# Runs the tests
+$ ./gradlew functionalTest
+
+# Tears down containers
+$ docker-compose -f docker-compose-test.yml down
+```
+
 ## Reference Implementations
 
 A list of Reference Implementations
 - [Testing](docs/testing/index.md)
 - [Messaging](docs/messaging/activemq.md)
 
-## Developing
+## To be converted to docs
 
-### Running Tests
-
-```bash
-
-// Running Unit and Integration Tests from CLI
-./gradlew test
-
-// Running Functional Tests from CLI
-./gradlew functionalTest
-```
 ### CodeCov
 
       - name: Upload coverage to Codecov
@@ -94,7 +116,7 @@ A list of Reference Implementations
           flags: unittests
           name: codecov-umbrella
 
-## SPring profiles
+### Spring profiles
 
 Set env variable
 

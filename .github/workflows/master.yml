@@ -35,12 +35,10 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
       - name: Test with Coverage
-        run: ./gradlew test
+        run: make test
       - name: Analysis with SonarCloud
-        run: ./gradlew sonarqube
+        run: make analyseWithSonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -61,7 +59,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Functional Tests
-        run: ./gradlew functionalTest
+        run: make testFunctional
 
   # Deploy Docker Image
   deploy-docker:
@@ -77,7 +75,7 @@ jobs:
           architecture: 'x64'
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - run: ./gradlew bootJar
+      - run: make package
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
