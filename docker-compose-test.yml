@@ -7,3 +7,8 @@ services:
       dockerfile: docker/component/Dockerfile
     ports:
       - 8080:8080
+  activemq:
+    image: rmohr/activemq:5.15.9-alpine
+    ports:
+      - 61616:61616
+      - 8161:8161

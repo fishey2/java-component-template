@@ -51,7 +51,7 @@ jobs:
 
   deploy:
     name: Package and Deploy
-    needs: [test, functional-tests]
+    needs: [build]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
