@@ -1,0 +1,35 @@
+sourceSets {
+    testIntegration {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+        }
+        resources.srcDir file('src/test/resources')
+    }
+}
+
+configurations {
+    testIntegrationImplementation.extendsFrom implementation
+    testIntegrationRuntimeOnly.extendsFrom runtimeOnly
+}
+
+task testIntegration(type: Test) {
+    group "verification"
+
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
+
+testIntegration {
+    useJUnitPlatform()
+
+    filter {
+        includeTestsMatching "*IT"
+    }
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+check.dependsOn testIntegration

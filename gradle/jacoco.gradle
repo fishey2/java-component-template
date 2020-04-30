@@ -1,0 +1,39 @@
+jacocoTestCoverageVerification {
+    sourceSets sourceSets.main
+
+    executionData test
+    executionData testIntegration
+
+    violationRules {
+        rule {
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 1.0
+            }
+            excludes = [
+                    'com.roboautomator.component.MainApplication'
+            ]
+        }
+    }
+}
+
+jacocoTestReport {
+    sourceSets sourceSets.main
+
+    executionData test
+    executionData testIntegration
+
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.enabled true
+    }
+}
+
+jacocoTestCoverageVerification.dependsOn test
+jacocoTestCoverageVerification.dependsOn testIntegration
+
+jacocoTestCoverageVerification.finalizedBy jacocoTestReport
+
+check.dependsOn jacocoTestCoverageVerification

@@ -41,8 +41,10 @@ dependencies {
     annotationProcessor group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
 }
 
-apply from: 'gradle/unit-test.gradle'
-apply from: 'gradle/functional-test.gradle'
+apply from: 'gradle/test.gradle'
+apply from: 'gradle/test-integration.gradle'
+apply from: 'gradle/test-functional.gradle'
+apply from: 'gradle/jacoco.gradle'
 apply from: 'gradle/sonar.gradle'
 
 bootJar {

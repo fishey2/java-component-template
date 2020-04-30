@@ -1,0 +1,40 @@
+sourceSets {
+    testFunctional {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/functional-test/java')
+        }
+        resources.srcDir file('src/functional-test/resources')
+    }
+}
+
+configurations {
+    testFunctionalImplementation.extendsFrom testImplementation
+    testFunctionalRuntime.extendsFrom testRuntime
+}
+
+idea {
+    module {
+        testSourceDirs += sourceSets.testFunctional.java.srcDirs
+        testResourceDirs += sourceSets.testFunctional.resources.srcDirs
+        scopes.TEST.plus += [ configurations.testFunctionalCompile ]
+    }
+}
+
+task testFunctional(type: Test) {
+    group = "verification"
+    testClassesDirs = sourceSets.testFunctional.output.classesDirs
+    classpath = sourceSets.testFunctional.runtimeClasspath
+    outputs.upToDateWhen { false }
+}
+
+testFunctional {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+check.dependsOn testFunctional

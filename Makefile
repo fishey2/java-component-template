@@ -28,16 +28,24 @@ _setUpGradle:
 	echo "Adding execure permissions to Gradle"
 	chmod +x ./gradlew
 
-test: _setUpGradle _testComposeUp
-	echo "Running tests"
+test: _setUpGradle
+	echo "Running Unit tests"
 	./gradlew test
+
+testIntegration: _setUpGradle _testComposeUp
+	echo "Running Integration tests"
+	./gradlew testIntegration
 	make _testComposeDown
 
 testFunctional: _setUpGradle _functionalComposeUp
 	make _waitForLocalService
-	echo "Running functional tests"
-	./gradlew functionalTest
+	echo "Running Functional tests"
+	./gradlew testFunctional
 	make _functionalComposeDown
+
+analyseWithJacoco: _setUpGradle
+	echo "Running jacoco analysis"
+	./gradlew jacocoTestCoverageVerification
 
 analyseWithSonar: _setUpGradle
 	echo "Running sonar analysis"

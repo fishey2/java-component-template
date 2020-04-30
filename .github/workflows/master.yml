@@ -35,9 +35,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Test with Coverage
+      - name: Unit Tests
         run: make test
-      - name: Analysis with SonarCloud
+      - name: Integration Tests
+        run: make testIntegration
+      - name: Jacoco Analysis
+        run: make analyseWithJacoco
+      - name: SonarCloud Analysis
         run: make analyseWithSonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
