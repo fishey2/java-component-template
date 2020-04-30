@@ -29,6 +29,15 @@ jacocoTestReport {
         csv.enabled false
         html.enabled true
     }
+
+    // Ensure exclusions are explicit
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'com/roboautomator/component/MainApplication*' // Only calls main(String[]) which cannot be tested
+            ])
+        }))
+    }
 }
 
 jacocoTestCoverageVerification.dependsOn test
