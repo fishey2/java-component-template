@@ -40,7 +40,7 @@ public class MessageControllerTest extends AbstractLoggingTest<MessageController
 
     @BeforeEach
     public void setupMockMvc() {
-        MessageController messageController = new MessageController(activeMQProducer);
+        var messageController = new MessageController(activeMQProducer);
         setupLoggingAppender(messageController);
         mockMvc = MockMvcBuilders.standaloneSetup(messageController).build();
     }
@@ -56,7 +56,7 @@ public class MessageControllerTest extends AbstractLoggingTest<MessageController
                 .extracting(ILoggingEvent::getMessage)
                 .contains("Received request to send the message \"{}\" to queue");
 
-        String[] listOfArgs = new String[]{"Hello"};
+        var listOfArgs = new String[]{"Hello"};
 
         assertThat(getLoggingEventListAppender().list)
                 .extracting(ILoggingEvent::getArgumentArray)

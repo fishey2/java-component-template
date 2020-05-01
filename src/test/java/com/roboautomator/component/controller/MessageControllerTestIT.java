@@ -37,10 +37,10 @@ public class MessageControllerTestIT {
     @Test
     public void canSendMessageToMessageQueue() {
 
-        ResponseEntity<String> response = template.postForEntity(base.toString(),
+        var stringResponseEntity = template.postForEntity(base.toString(),
                 TEST_MESSAGE, String.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isEqualTo(TEST_MESSAGE);
+        assertThat(stringResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(stringResponseEntity.getBody()).isEqualTo(TEST_MESSAGE);
     }
 }

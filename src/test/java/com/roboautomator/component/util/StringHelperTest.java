@@ -9,28 +9,28 @@ public class StringHelperTest {
 
     @Test
     public void shouldRemoveNewlineCharacters() {
-        String testString = "Hello\nWorld";
+        var testString = "Hello\nWorld";
 
         assertThat(cleanString(testString)).isEqualTo("HelloWorld");
     }
 
     @Test
     public void shouldRemoveCarriageReturnCharacters() {
-        String testString = "Hello\rWorld";
+        var testString = "Hello\rWorld";
 
         assertThat(cleanString(testString)).isEqualTo("HelloWorld");
     }
 
     @Test
     public void shouldRemoveTabCharacters() {
-        String testString = "Hello\tWorld";
+        var testString = "Hello\tWorld";
 
         assertThat(cleanString(testString)).isEqualTo("HelloWorld");
     }
 
     @Test
     public void shouldRemoveMultipleEscapeCharacters() {
-        String testString = "He\nll\ro\t\nWor\r\rl\t\td";
+        var testString = "He\nll\ro\t\nWor\r\rl\t\td";
 
         assertThat(cleanString(testString)).isEqualTo("HelloWorld");
     }

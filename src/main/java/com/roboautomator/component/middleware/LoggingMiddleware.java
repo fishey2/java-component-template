@@ -24,6 +24,7 @@ public class LoggingMiddleware extends HandlerInterceptorAdapter {
     private static final Logger log = LoggerFactory.getLogger(LoggingMiddleware.class);
 
     private static final String LOG_TEMPLATE = "{}: {}";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
@@ -53,7 +54,7 @@ public class LoggingMiddleware extends HandlerInterceptorAdapter {
     private String getAllHeadersAsString(HttpServletRequest request) {
 
 
-        StringBuilder stringBuilder = new StringBuilder();
+        var stringBuilder = new StringBuilder();
 
         stringBuilder.append("[ ");
 

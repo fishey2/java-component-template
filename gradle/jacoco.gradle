@@ -12,7 +12,7 @@ jacocoTestCoverageVerification {
                 minimum = 1.0
             }
             excludes = [
-                    'com.roboautomator.component.MainApplication'
+                    'com.roboautomator.component.MainApplication' // Only calls main(String[]) which cannot be tested
             ]
         }
     }

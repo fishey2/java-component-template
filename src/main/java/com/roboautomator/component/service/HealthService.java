@@ -1,16 +1,14 @@
 package com.roboautomator.component.service;
 
-import com.roboautomator.component.model.Health;
+import com.roboautomator.component.model.HealthEntity;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class HealthService {
 
-    private final Health health;
-
-    public HealthService(Health health) {
-        this.health = health;
-    }
+    private final HealthEntity health;
 
     public boolean isHealthOk() {
         return health.isHealthOk();

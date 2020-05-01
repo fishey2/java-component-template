@@ -2,6 +2,7 @@ package com.roboautomator.component.service.message.activemq.producer;
 
 import com.roboautomator.component.config.message.ActiveMQConfig;
 import com.roboautomator.component.service.message.QueueProducer;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Component;
  * {@link com.roboautomator.component.controller.MessageController}</p>
  */
 @Component
+@AllArgsConstructor
 public class ActiveMQProducer implements QueueProducer<String> {
 
     private static Logger log = LoggerFactory.getLogger(ActiveMQProducer.class);
@@ -34,10 +36,6 @@ public class ActiveMQProducer implements QueueProducer<String> {
     private static final String QUEUE_NAME = "testQueue";
 
     private final JmsTemplate jmsTemplate;
-
-    public ActiveMQProducer(JmsTemplate jmsTemplate) {
-        this.jmsTemplate = jmsTemplate;
-    }
 
     @Override
     public void sendMessage(String message) {

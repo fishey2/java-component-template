@@ -66,9 +66,9 @@ public abstract class AbstractLoggingTest<T> {
     }
 
     private ListAppender<ILoggingEvent> setUpListAppender(T object) {
-        Logger logger = (Logger) LoggerFactory.getLogger(object.getClass());
+        var logger = (Logger) LoggerFactory.getLogger(object.getClass());
 
-        ListAppender<ILoggingEvent> loggingEventListAppender = new ListAppender<>();
+        var loggingEventListAppender = new ListAppender<ILoggingEvent>();
         loggingEventListAppender.start();
 
         logger.addAppender(loggingEventListAppender);

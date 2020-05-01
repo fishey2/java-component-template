@@ -1,4 +1,4 @@
-package com.roboautomator.component.health;
+package com.roboautomator.component.swagger;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;

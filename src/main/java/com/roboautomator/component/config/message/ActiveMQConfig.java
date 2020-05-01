@@ -40,7 +40,7 @@ public class ActiveMQConfig implements QueueConfig {
      */
     public ActiveMQConnectionFactory configureActiveMQConnectionFactory() {
 
-        ActiveMQConnectionFactory activeMQConnectionFactory = brokerUrl.contains("ssl")
+        var activeMQConnectionFactory = brokerUrl.contains("ssl")
                 ? getSslConnectionFactory()
                 : new ActiveMQConnectionFactory();
 
@@ -62,15 +62,14 @@ public class ActiveMQConfig implements QueueConfig {
     @Bean
     @Override
     public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
-        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
-        factory.setConnectionFactory(getConnectionFactory());
-        factory.setConcurrency("1-1");
-        return factory;
+        var defaultJmsListenerContainerFactory = new DefaultJmsListenerContainerFactory();
+        defaultJmsListenerContainerFactory.setConnectionFactory(getConnectionFactory());
+        defaultJmsListenerContainerFactory.setConcurrency("1-1");
+        return defaultJmsListenerContainerFactory;
     }
 
     @Override
     public JmsTemplate jmsTemplate() {
         return new JmsTemplate(getConnectionFactory());
     }
-
 }

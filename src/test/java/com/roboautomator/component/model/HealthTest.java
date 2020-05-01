@@ -7,11 +7,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HealthTest {
 
-    private Health health;
+    private HealthEntity health;
 
     @BeforeEach
     public void beforeEach() {
-        health = new Health();
+        health = new HealthEntity();
     }
 
     @Test

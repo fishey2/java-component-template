@@ -24,6 +24,9 @@ dependencies {
     implementation('io.springfox:springfox-swagger2:2.9.2')
     implementation('io.springfox:springfox-swagger-ui:2.9.2')
 
+    // For Lombok
+    implementation('org.projectlombok:lombok:1.18.12')
+
     // For Logging Implementation
     implementation('ch.qos.logback:logback-classic:1.2.3')
     implementation('ch.qos.logback.contrib:logback-json-classic:0.1.5')
@@ -31,6 +34,7 @@ dependencies {
     implementation('org.apache.logging.log4j:log4j-to-slf4j:2.11.1')
     implementation('org.slf4j:jul-to-slf4j:1.7.25')
 
+    // Testing
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     testImplementation('org.mockito:mockito-core:2.24.0')
@@ -38,7 +42,9 @@ dependencies {
     testImplementation('io.rest-assured:json-path:4.1.2')
     testImplementation('io.rest-assured:xml-path:4.1.2')
 
-    annotationProcessor group: 'org.springframework.boot', name: 'spring-boot-configuration-processor'
+    // Annotations
+    annotationProcessor('org.springframework.boot:spring-boot-configuration-processor')
+    annotationProcessor('org.projectlombok:lombok:1.18.12')
 }
 
 apply from: 'gradle/test.gradle'

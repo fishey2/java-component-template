@@ -35,9 +35,9 @@ public class HealthControllerTestIT {
 
     @Test
     public void getHello() {
-        ResponseEntity<String> response = template.getForEntity(base.toString(),
+        var stringResponseEntity = template.getForEntity(base.toString(),
                 String.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(stringResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }

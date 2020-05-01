@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 public class HealthControllerFuncTest {
 
     @Test
-    public void checkHealthReturns200() {
+    public void checkHealthEndpointGetRequestReturns200() {
         given()
                 .when()
                 .get("http://localhost:8080/health")

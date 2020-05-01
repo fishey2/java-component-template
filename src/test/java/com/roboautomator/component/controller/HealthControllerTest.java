@@ -30,7 +30,7 @@ public class HealthControllerTest {
     public void beforeEach() {
 
         healthService = mock(HealthService.class);
-        HealthController healthController = new HealthController(healthService);
+        var healthController = new HealthController(healthService);
         mockMvc = MockMvcBuilders.standaloneSetup(healthController).build();
     }
 

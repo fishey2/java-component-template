@@ -1,6 +1,6 @@
 package com.roboautomator.component.service;
 
-import com.roboautomator.component.model.Health;
+import com.roboautomator.component.model.HealthEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ public class HealthServiceTest {
 
     @BeforeEach
     void createHealthService() {
-        healthService = new HealthService(new Health());
+        healthService = new HealthService(new HealthEntity());
     }
 
     @Test

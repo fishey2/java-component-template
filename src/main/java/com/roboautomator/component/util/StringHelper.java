@@ -1,10 +1,11 @@
 package com.roboautomator.component.util;
 
-public class StringHelper {
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
-    private StringHelper() {
-        // Empty private constructor
-    }
+// Adds private constructor with no args
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class StringHelper {
 
     /**
      * <p>Removes the following characters to protect users from log injection:</p>

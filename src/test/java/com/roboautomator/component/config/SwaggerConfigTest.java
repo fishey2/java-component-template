@@ -2,12 +2,10 @@ package com.roboautomator.component.config;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 
 import static com.roboautomator.component.config.SwaggerConfig.*;
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 public class SwaggerConfigTest {
 
@@ -30,10 +28,10 @@ public class SwaggerConfigTest {
 
     @Test
     public void testApiInfoIncludesCorrectInformation() {
-        ApiInfo testApiInfo = testConfig.apiEndPointsInfo();
+        var apiInfo = testConfig.apiEndPointsInfo();
 
-        assertThat(testApiInfo.getDescription()).isEqualTo(APPLICATION_DESCRIPTION);
-        assertThat(testApiInfo.getTitle()).isEqualTo(APPLICATION_NAME);
-        assertThat(testApiInfo.getVersion()).isEqualTo(APPLICATION_VERSION);
+        assertThat(apiInfo.getDescription()).isEqualTo(APPLICATION_DESCRIPTION);
+        assertThat(apiInfo.getTitle()).isEqualTo(APPLICATION_NAME);
+        assertThat(apiInfo.getVersion()).isEqualTo(APPLICATION_VERSION);
     }
 }

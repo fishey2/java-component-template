@@ -130,11 +130,11 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
         doReturn(TEST_CONTENT_TYPE).when(httpServletRequest).getContentType();
         doReturn(TEST_CONTENT_LENGTH).when(httpServletRequest).getContentLength();
 
-        Vector<String> headerNames = new Vector<>();
-        headerNames.add("firstHeader");
-        headerNames.add("secondHeader");
+        var headerNamesVector = new Vector<String>();
+        headerNamesVector.add("firstHeader");
+        headerNamesVector.add("secondHeader");
 
-        doReturn(headerNames.elements()).when(httpServletRequest).getHeaderNames();
+        doReturn(headerNamesVector.elements()).when(httpServletRequest).getHeaderNames();
 
         doReturn("value1").when(httpServletRequest).getHeader("firstHeader");
         doReturn("value2").when(httpServletRequest).getHeader("secondHeader");
