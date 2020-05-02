@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
+import static com.roboautomator.component.util.StringHelper.cleanString;
+
 @Component
 public class CorrelationMiddleware extends HandlerInterceptorAdapter {
 
@@ -20,7 +22,7 @@ public class CorrelationMiddleware extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        var correlationId = extractOrGenerateCorrelationId(request);
+        var correlationId = cleanString(extractOrGenerateCorrelationId(request));
         response.setHeader(X_CORRELATION_ID, correlationId);
         MDC.put(LOG_CORRELATION_ID, correlationId);
 
