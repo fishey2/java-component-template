@@ -1,7 +1,6 @@
 package com.roboautomator.component.controller;
 
 import com.roboautomator.component.MainApplication;
-import com.roboautomator.component.controller.HealthController;
 import com.roboautomator.component.service.HealthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ public class HealthControllerTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    public void beforeEach() {
+    void beforeEach() {
 
         healthService = mock(HealthService.class);
         var healthController = new HealthController(healthService);
@@ -35,7 +34,7 @@ public class HealthControllerTest {
     }
 
     @Test
-    public void checkHealthIsNotOk() throws Exception {
+    void checkHealthIsNotOk() throws Exception {
 
         doReturn(false).when(healthService).isHealthOk();
 
@@ -45,7 +44,7 @@ public class HealthControllerTest {
     }
 
     @Test
-    public void checkHealthIsOk() throws Exception {
+    void checkHealthIsOk() throws Exception {
 
         doReturn(true).when(healthService).isHealthOk();
 

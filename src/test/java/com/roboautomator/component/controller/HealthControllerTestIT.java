@@ -34,7 +34,7 @@ public class HealthControllerTestIT {
     }
 
     @Test
-    public void getHello() {
+    void shouldReturn200WhenHealthEndpointCalled() {
         var stringResponseEntity = template.getForEntity(base.toString(),
                 String.class);
 

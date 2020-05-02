@@ -12,7 +12,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class LoggingMiddlewareTest {
+public class LoggingConfigTest {
 
     @Mock
     private LoggingMiddleware loggingMiddleware;
@@ -23,12 +23,12 @@ public class LoggingMiddlewareTest {
     private LoggingConfig loggingConfig;
 
     @BeforeEach
-    public void setUpLoggingConfig() {
+    void setUpLoggingConfig() {
         loggingConfig = new LoggingConfig(loggingMiddleware);
     }
 
     @Test
-    public void shouldAddLoggingMiddlewareToInteceptorRegistry() {
+    void shouldAddLoggingMiddlewareToInteceptorRegistry() {
 
         loggingConfig.addInterceptors(interceptorRegistry);
 

@@ -41,20 +41,20 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
     private LoggingMiddleware loggingMiddleware;
 
     @BeforeEach
-    public void setupLoggingMiddleware() {
+    void setupLoggingMiddleware() {
         loggingMiddleware = new LoggingMiddleware();
         setupLoggingAppender(loggingMiddleware);
     }
 
     @Test
-    public void shouldReturnTrueWhenPreHandleIsCalled() {
+    void shouldReturnTrueWhenPreHandleIsCalled() {
         assertThat(loggingMiddleware.preHandle(httpServletRequest,
                 httpServletResponse,
                 handlerMethod)).isTrue();
     }
 
     @Test
-    public void shouldLogRequestWithEmptyArrayWhenNoHeadersAreSpecified() {
+    void shouldLogRequestWithEmptyArrayWhenNoHeadersAreSpecified() {
         mockHttpServletRequest();
 
         doReturn(TEST_CONTENT_TYPE).when(httpServletRequest).getContentType();
@@ -74,7 +74,7 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
     }
 
     @Test
-    public void shouldCleanStringForAnyInputsFromHttpServletRequest() {
+    void shouldCleanStringForAnyInputsFromHttpServletRequest() {
         mockHttpServletRequest();
 
         doReturn(TEST_CONTENT_TYPE).when(httpServletRequest).getContentType();
@@ -101,7 +101,7 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
     }
 
     @Test
-    public void shouldLogRequestWithEmptyArrayWithEmptyHeadersAreSpecified() {
+    void shouldLogRequestWithEmptyArrayWithEmptyHeadersAreSpecified() {
         mockHttpServletRequest();
 
         doReturn(TEST_CONTENT_TYPE).when(httpServletRequest).getContentType();
@@ -124,7 +124,7 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
     }
 
     @Test
-    public void shouldLogRequestWithHeadersArrayWhenNoHeadersAreSpecified() {
+    void shouldLogRequestWithHeadersArrayWhenNoHeadersAreSpecified() {
         mockHttpServletRequest();
 
         doReturn(TEST_CONTENT_TYPE).when(httpServletRequest).getContentType();
@@ -155,7 +155,7 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
     }
 
     @Test
-    public void shouldLogResponseStatusAndHeadersAsEmptyListIfNull() {
+    void shouldLogResponseStatusAndHeadersAsEmptyListIfNull() {
         mockHttpServletRequest();
         mockHttpServletResponse();
 
@@ -174,7 +174,7 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
     }
 
     @Test
-    public void shouldLogResponseStatusAndHeadersAsEmptyListIfHeaderNamesIsEmpty() {
+    void shouldLogResponseStatusAndHeadersAsEmptyListIfHeaderNamesIsEmpty() {
         mockHttpServletRequest();
         mockHttpServletResponse();
 
@@ -193,7 +193,7 @@ public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddlewar
     }
 
     @Test
-    public void shouldLogResponseStatusAndHeaders() {
+    void shouldLogResponseStatusAndHeaders() {
         mockHttpServletRequest();
         mockHttpServletResponse();
 

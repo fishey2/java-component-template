@@ -22,7 +22,7 @@ public class MainApplicationTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testHealthEndpointRouting() throws Exception {
+    void testHealthEndpointRouting() throws Exception {
         mockMvc.perform(get("/health"))
                 .andExpect(status().is(200))
                 .andExpect(content().string("{}"));

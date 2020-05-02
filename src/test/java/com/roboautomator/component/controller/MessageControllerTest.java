@@ -14,7 +14,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.jms.MessageNotWriteableException;
@@ -39,14 +38,14 @@ public class MessageControllerTest extends AbstractLoggingTest<MessageController
     private MockMvc mockMvc;
 
     @BeforeEach
-    public void setupMockMvc() {
+    void setupMockMvc() {
         var messageController = new MessageController(activeMQProducer);
         setupLoggingAppender(messageController);
         mockMvc = MockMvcBuilders.standaloneSetup(messageController).build();
     }
 
     @Test
-    public void shouldCallLogWithMessage() throws Exception {
+    void shouldCallLogWithMessage() throws Exception {
         willDoNothing().given(activeMQProducer).sendMessage(any());
 
         mockMvc.perform(post(TEST_ENDPOINT).content("Hello"))
@@ -64,7 +63,7 @@ public class MessageControllerTest extends AbstractLoggingTest<MessageController
     }
 
     @Test
-    public void shouldReturnOkWhenMessageSent() throws Exception {
+    void shouldReturnOkWhenMessageSent() throws Exception {
         willDoNothing().given(activeMQProducer).sendMessage(any());
 
         mockMvc.perform(post(TEST_ENDPOINT).content("Hello"))
@@ -72,17 +71,17 @@ public class MessageControllerTest extends AbstractLoggingTest<MessageController
     }
 
     @Test
-    public void shouldReturnMessageInResponseBody() throws Exception {
+    void shouldReturnMessageInResponseBody() throws Exception {
         willDoNothing().given(activeMQProducer).sendMessage(any());
 
-        MvcResult result = mockMvc.perform(post(TEST_ENDPOINT).content("Hello"))
+        var result = mockMvc.perform(post(TEST_ENDPOINT).content("Hello"))
                 .andReturn();
 
         assertThat(result.getResponse().getContentAsString()).isEqualTo("Hello");
     }
 
     @Test
-    public void shouldReturn503WhenMessageNotSent() throws Exception {
+    void shouldReturn503WhenMessageNotSent() throws Exception {
         willThrow(new org.springframework.jms.MessageNotWriteableException(new MessageNotWriteableException("Error Occurred")))
                 .given(activeMQProducer)
                 .sendMessage("error");
@@ -92,13 +91,13 @@ public class MessageControllerTest extends AbstractLoggingTest<MessageController
     }
 
     @Test
-    public void shouldReturnErrorMessageWhenMessageHasNotBeenSent() throws Exception {
-        Throwable exception = new org.springframework.jms.MessageNotWriteableException(new MessageNotWriteableException("Error Occurred"));
+    void shouldReturnErrorMessageWhenMessageHasNotBeenSent() throws Exception {
+        var exception = new org.springframework.jms.MessageNotWriteableException(new MessageNotWriteableException("Error Occurred"));
         willThrow(exception)
                 .given(activeMQProducer)
                 .sendMessage("error");
 
-        MvcResult result = mockMvc.perform(post(TEST_ENDPOINT).content("error"))
+        var result = mockMvc.perform(post(TEST_ENDPOINT).content("error"))
                 .andReturn();
 
         assertThat(result.getResponse().getContentAsString())
@@ -106,8 +105,8 @@ public class MessageControllerTest extends AbstractLoggingTest<MessageController
     }
 
     @Test
-    public void shouldLogAnErrorWhenMessageCanNotBeProcessed() throws Exception {
-        Throwable exception = new org.springframework.jms.MessageNotWriteableException(new MessageNotWriteableException("Error Occurred"));
+    void shouldLogAnErrorWhenMessageCanNotBeProcessed() throws Exception {
+        var exception = new org.springframework.jms.MessageNotWriteableException(new MessageNotWriteableException("Error Occurred"));
         willThrow(exception)
                 .given(activeMQProducer)
                 .sendMessage("error");

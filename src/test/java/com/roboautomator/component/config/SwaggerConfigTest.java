@@ -12,22 +12,22 @@ public class SwaggerConfigTest {
     private SwaggerConfig testConfig;
 
     @BeforeEach
-    private void setTestConfig() {
+    void setTestConfig() {
         testConfig = new SwaggerConfig();
     }
 
     @Test
-    public void testApiConfigIsSwagger2() {
+    void testApiConfigIsSwagger2() {
         assertThat(testConfig.api().getDocumentationType()).isEqualTo(DocumentationType.SWAGGER_2);
     }
 
     @Test
-    public void testIfSwaggerApiIsEnabled() {
+    void testIfSwaggerApiIsEnabled() {
         assertThat(testConfig.api().isEnabled()).isTrue();
     }
 
     @Test
-    public void testApiInfoIncludesCorrectInformation() {
+    void testApiInfoIncludesCorrectInformation() {
         var apiInfo = testConfig.apiEndPointsInfo();
 
         assertThat(apiInfo.getDescription()).isEqualTo(APPLICATION_DESCRIPTION);

@@ -15,12 +15,12 @@ public class HealthTest {
     }
 
     @Test
-    public void testHealthDefaultValueIsOk() {
+    void testHealthDefaultValueIsOk() {
         assertThat(health.isHealthOk()).isTrue();
     }
 
     @Test
-    public void testSetHealthOverridesDefaultValue() {
+    void testSetHealthOverridesDefaultValue() {
         health.setHealthOk(false);
         assertThat(health.isHealthOk()).isFalse();
     }

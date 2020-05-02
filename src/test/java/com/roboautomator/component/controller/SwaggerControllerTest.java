@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class SwaggerControllerTest {
 
     @Autowired
-    WebApplicationContext wac;
+    private WebApplicationContext wac;
 
     private MockMvc mockMvc;
 
@@ -30,7 +30,7 @@ public class SwaggerControllerTest {
     }
 
     @Test
-    public void testThatUserIsRedirectedToSwaggerDocsFromRoot() throws Exception {
+    void testThatUserIsRedirectedToSwaggerDocsFromRoot() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/swagger-ui.html"));

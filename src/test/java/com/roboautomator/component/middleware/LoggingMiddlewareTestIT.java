@@ -27,7 +27,7 @@ public class LoggingMiddlewareTestIT {
     private MockMvc mockMvc;
 
     @Test
-    public void checkLoggingMiddlewarePreHandlerIsCalledOnRequest() throws Exception {
+    void checkLoggingMiddlewarePreHandlerIsCalledOnRequest() throws Exception {
 
         doCallRealMethod().when(loggingMiddleware).preHandle(any(), any(), any());
 
@@ -38,7 +38,7 @@ public class LoggingMiddlewareTestIT {
     }
 
     @Test
-    public void checkLoggingMiddlewarePostHandlerIsCalledOnResponse() throws Exception {
+    void checkLoggingMiddlewarePostHandlerIsCalledOnResponse() throws Exception {
 
         doCallRealMethod().when(loggingMiddleware).preHandle(any(), any(), any());
         doCallRealMethod().when(loggingMiddleware).postHandle(any(), any(), any(), any());

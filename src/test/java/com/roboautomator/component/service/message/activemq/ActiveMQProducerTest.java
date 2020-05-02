@@ -27,13 +27,13 @@ public class ActiveMQProducerTest extends AbstractLoggingTest<ActiveMQProducer> 
     private ActiveMQProducer activeMQProducer;
 
     @BeforeEach
-    public void setupProducer() {
+    void setupProducer() {
         activeMQProducer = new ActiveMQProducer(jmsTemplate);
         setupLoggingAppender(activeMQProducer);
     }
 
     @Test
-    public void shouldCallJmsTemplateWithMessageToBeSent() {
+    void shouldCallJmsTemplateWithMessageToBeSent() {
         activeMQProducer.sendMessage("Message");
 
         verify(jmsTemplate, times(1))
@@ -41,7 +41,7 @@ public class ActiveMQProducerTest extends AbstractLoggingTest<ActiveMQProducer> 
     }
 
     @Test
-    public void shouldCallJmsTemplateWithCorrectQueueName() {
+    void shouldCallJmsTemplateWithCorrectQueueName() {
         activeMQProducer.sendMessage("Any");
 
         verify(jmsTemplate, times(1))
@@ -49,7 +49,7 @@ public class ActiveMQProducerTest extends AbstractLoggingTest<ActiveMQProducer> 
     }
 
     @Test
-    public void shouldCallLogWithMessageInformation() {
+    void shouldCallLogWithMessageInformation() {
         activeMQProducer.sendMessage("Message");
 
         assertThat(getLoggingEventListAppender().list)

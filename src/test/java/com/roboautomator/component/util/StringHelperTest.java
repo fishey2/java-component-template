@@ -8,28 +8,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StringHelperTest {
 
     @Test
-    public void shouldRemoveNewlineCharacters() {
+    void shouldRemoveNewlineCharacters() {
         var testString = "Hello\nWorld";
 
         assertThat(cleanString(testString)).isEqualTo("HelloWorld");
     }
 
     @Test
-    public void shouldRemoveCarriageReturnCharacters() {
+    void shouldRemoveCarriageReturnCharacters() {
         var testString = "Hello\rWorld";
 
         assertThat(cleanString(testString)).isEqualTo("HelloWorld");
     }
 
     @Test
-    public void shouldRemoveTabCharacters() {
+    void shouldRemoveTabCharacters() {
         var testString = "Hello\tWorld";
 
         assertThat(cleanString(testString)).isEqualTo("HelloWorld");
     }
 
     @Test
-    public void shouldRemoveMultipleEscapeCharacters() {
+    void shouldRemoveMultipleEscapeCharacters() {
         var testString = "He\nll\ro\t\nWor\r\rl\t\td";
 
         assertThat(cleanString(testString)).isEqualTo("HelloWorld");
