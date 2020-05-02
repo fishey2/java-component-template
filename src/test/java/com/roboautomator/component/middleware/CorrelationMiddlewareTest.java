@@ -82,6 +82,19 @@ public class CorrelationMiddlewareTest extends AbstractLoggingTest<CorrelationMi
     }
 
     @Test
+    void shouldAddExistingCorrelationIdToResponseIfOneExistsAndCleanItOfSpecialCharacters() {
+        var mockServletResponse = new MockHttpServletResponse();
+
+        doReturn("a\nb\tc\rd").when(httpServletRequest).getHeader(CORRELATION_ID);
+
+        var result = correlationMiddleware.preHandle(httpServletRequest, mockServletResponse, handlerMethod);
+
+        assertThat(result).isTrue();
+        assertThat(mockServletResponse.getHeader(CORRELATION_ID)).isNotNull();
+        assertThat(mockServletResponse.getHeader(CORRELATION_ID)).isEqualTo("abcd");
+    }
+
+    @Test
     @SuppressWarnings("unchecked")
     void shouldAddCorrelationIdToLogContext() {
         doReturn(REQUEST_CORRELATION_ID).when(httpServletRequest).getHeader(CORRELATION_ID);
