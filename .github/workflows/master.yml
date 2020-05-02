@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout Sourcecode
         uses: actions/checkout@v2
+        with:
+          - fetch-depth: '0'
       - name: Setup Java Development Environment
         uses: actions/setup-java@master
         with:
