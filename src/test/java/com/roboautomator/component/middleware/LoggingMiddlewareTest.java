@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
-public class LoggingMiddlewareTest  extends AbstractLoggingTest<LoggingMiddleware> {
+public class LoggingMiddlewareTest extends AbstractLoggingTest<LoggingMiddleware> {
 
     private static final String TEST_METHOD = "POST";
     private static final String TEST_URI = "/health";
