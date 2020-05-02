@@ -11,6 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.MDC;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,6 +35,9 @@ public class CorrelationMiddlewareTest extends AbstractLoggingTest<CorrelationMi
 
     @Mock
     private HandlerMethod handlerMethod;
+
+    @Mock
+    private ModelAndView modelAndView;
 
     private CorrelationMiddleware correlationMiddleware;
 
@@ -121,5 +126,26 @@ public class CorrelationMiddlewareTest extends AbstractLoggingTest<CorrelationMi
         assertThat(getLoggingEventListAppender().list)
                 .extracting(ILoggingEvent::getMessage)
                 .contains("No correlationId found, generated new correlationId \"{}\"");
+    }
+
+    @Test
+    void shouldClearMdcCorrelationIdPropertyFromLoggingContextOnResponse() {
+        correlationMiddleware.preHandle(httpServletRequest, httpServletResponse, handlerMethod);
+
+        assertThat(MDC.get(LOG_CORRELATION_ID)).matches(UUID_PATTERN);
+
+        correlationMiddleware.postHandle(httpServletRequest, httpServletResponse, handlerMethod, modelAndView);
+
+        assertThat(MDC.get(LOG_CORRELATION_ID)).isNull();
+    }
+
+    @Test
+    void shouldLogThatItIsClearingTheCorrelationIdOnPostHandle() {
+        correlationMiddleware.preHandle(httpServletRequest, httpServletResponse, handlerMethod);
+        correlationMiddleware.postHandle(httpServletRequest, httpServletResponse, handlerMethod, modelAndView);
+
+        assertThat(getLoggingEventListAppender().list)
+                .extracting(ILoggingEvent::getFormattedMessage)
+                .contains("Clearing logging context correlation ID");
     }
 }

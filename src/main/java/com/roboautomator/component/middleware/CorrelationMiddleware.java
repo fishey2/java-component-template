@@ -3,7 +3,9 @@ package com.roboautomator.component.middleware;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,13 @@ public class CorrelationMiddleware extends HandlerInterceptorAdapter {
         log.info("Set logging context correlation ID to \"{}\"", correlationId);
 
         return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+                           @Nullable ModelAndView modelAndView) {
+        log.info("Clearing logging context correlation ID");
+        MDC.remove(LOG_CORRELATION_ID);
     }
 
     private String extractOrGenerateCorrelationId(HttpServletRequest request) {
