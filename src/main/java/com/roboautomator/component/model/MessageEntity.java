@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity(name = "Message")
 @Table(name = "message")
-@Builder(toBuilder = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
