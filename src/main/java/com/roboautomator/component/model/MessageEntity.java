@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Getter
 @SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class MessageEntity extends DefaultEntity {
 
     @Column(nullable = false)
