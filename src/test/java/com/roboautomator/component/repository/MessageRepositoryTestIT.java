@@ -13,15 +13,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
-import javax.transaction.Transactional;
-
-import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-@Transactional
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class MessageRepositoryTestIT {
 
@@ -72,5 +68,7 @@ public class MessageRepositoryTestIT {
 
         assertThat(messages.size()).isEqualTo(1);
         assertThat(messages.get(0).getId()).isEqualTo(messageEntity.getId());
+        assertThat(messages.get(0).getCreatedAt()).isNotNull();
+        assertThat(messages.get(0).getUpdatedAt()).isNotNull();
     }
 }
