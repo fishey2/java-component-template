@@ -1,6 +1,9 @@
 package com.roboautomator.component.service.message.activemq.consumer;
 
+import com.roboautomator.component.model.MessageEntity;
+import com.roboautomator.component.repository.MessageRepository;
 import com.roboautomator.component.service.message.QueueConsumer;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
@@ -28,6 +31,7 @@ import static com.roboautomator.component.util.StringHelper.cleanString;
  * </ul>
  */
 @Component
+@AllArgsConstructor
 public class ActiveMQConsumer implements QueueConsumer<String> {
 
     private static Logger log = LoggerFactory.getLogger(ActiveMQConsumer.class);
@@ -35,13 +39,22 @@ public class ActiveMQConsumer implements QueueConsumer<String> {
     private static final String QUEUE_NAME = "testQueue";
     private static final String LOG_SEPARATOR = "- - - - - - - - - - - - - - - - - - - - - - - -";
 
+    private MessageRepository messageRepository;
+
     @Override
     @JmsListener(destination = QUEUE_NAME)
     public void handleMessage(@Payload String message, @Headers MessageHeaders headers,
                                Message rawMessage, Session session) {
 
-        message = cleanString(message);
-        log.info("received <{}>", message);
+        var cleanMessage = cleanString(message);
+
+        var messageEntity = MessageEntity.builder()
+                .message(cleanMessage)
+                .build();
+
+        messageRepository.saveAndFlush(messageEntity);
+
+        log.info("received <{}>", cleanMessage);
 
         log.info(LOG_SEPARATOR);
         log.info("######          Message Details           #####");
