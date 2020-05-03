@@ -1,8 +1,8 @@
 package com.roboautomator.component;
 
+import com.roboautomator.component.util.AbstractMockMvcTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
@@ -25,10 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         HibernateJpaAutoConfiguration.class
 })
 @AutoConfigureMockMvc
-public class MainApplicationTest {
-
-    @Autowired
-    private MockMvc mockMvc;
+public class MainApplicationTest extends AbstractMockMvcTest {
 
     @Test
     void testHealthEndpointRouting() throws Exception {

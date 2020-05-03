@@ -2,6 +2,7 @@ package com.roboautomator.component.controller;
 
 import com.roboautomator.component.MainApplication;
 import com.roboautomator.component.service.HealthService;
+import com.roboautomator.component.util.AbstractMockMvcTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,6 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.*;
@@ -28,11 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         HibernateJpaAutoConfiguration.class
 })
 @AutoConfigureMockMvc
-public class HealthControllerTest {
+public class HealthControllerTest extends AbstractMockMvcTest {
 
     private HealthService healthService;
-
-    private MockMvc mockMvc;
 
     @BeforeEach
     void beforeEach() {
