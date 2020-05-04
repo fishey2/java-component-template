@@ -41,7 +41,7 @@ public class SomeEntity {
 }
 ```
 
-Which would be the equivlelent to changing the setter to:
+Which would be the equivalent to changing the setter to:
 
 ```java
 
@@ -106,7 +106,6 @@ With lombok, this can be simplified to just:
 
 ```java
 @Builder
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
 public class SomeEntity {
     

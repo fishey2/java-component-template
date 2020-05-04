@@ -1,0 +1,31 @@
+@startuml
+    !include https://gist.githubusercontent.com/fishey2/7178a88643a8850908c799be1ec68fd6/raw/fc90505df1321e5c5022eab84d1e0b5044194d1c/example_sequence_stylesheet.iuml
+
+    abstract class AbstractEntity {
+        + getId(void) : String
+    }
+
+    abstract class AbstractEntityBuilder {
+        + id(String) : T
+        + getId(void) : String
+    }
+
+    AbstractEntity +-- AbstractEntityBuilder
+
+    class AnEntity {
+        + getKey(void) : String
+        + {static} builder(void) : AnEntityBuilder
+    }
+
+    AbstractEntity 	<|-- AnEntity
+
+    class AnEntityBuilder {
+        + key(String) : AnEntityBuilder
+        + getKey(void) : String
+        + build(void): AnEntity
+    }
+
+    AbstractEntityBuilder <|-- AnEntityBuilder
+    AnEntity +-- AnEntityBuilder
+
+@enduml
