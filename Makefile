@@ -23,6 +23,9 @@ _functionalComposeDown:
 _waitForLocalService:
 	./scripts/wait-for-url.sh http://localhost:8080
 
+_gitFetchUnshallow:
+	./scripts/git-deep-fetch.sh
+
 # GRADLE RELATED STEPS
 _setUpGradle:
 	echo "Adding execure permissions to Gradle"
@@ -47,7 +50,7 @@ analyseWithJacoco: _setUpGradle
 	echo "Running jacoco analysis"
 	./gradlew jacocoTestCoverageVerification
 
-analyseWithSonar: _setUpGradle
+analyseWithSonar: _gitFetchUnshallow _setUpGradle
 	echo "Running sonar analysis"
 	./gradlew sonarqube
 
