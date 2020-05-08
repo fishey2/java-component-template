@@ -1,5 +1,6 @@
 package com.roboautomator.component.model;
 
+import com.roboautomator.component.service.health.Health;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -37,5 +38,19 @@ public class HealthEntityTest {
         assertThat(healthEntityString).contains("id=" + TEST_ID.toString());
         assertThat(healthEntityString).contains("updatedAt=" + TEST_UPDATED_AT.toString());
         assertThat(healthEntityString).contains("createdAt=" + TEST_CREATED_AT.toString());
+    }
+
+    @Test
+    void shouldBuildHealthEntity() {
+        var healthEntityBuilder = HealthEntity
+            .builder()
+            .id(TEST_ID)
+            .createdAt(TEST_CREATED_AT)
+            .updatedAt(TEST_UPDATED_AT);
+
+        assertThat(healthEntityBuilder.toString()).contains("id=" + TEST_ID);
+        assertThat(healthEntityBuilder.toString()).contains("updatedAt=" + TEST_UPDATED_AT);
+        assertThat(healthEntityBuilder.toString()).contains("createdAt=" + TEST_CREATED_AT);
+        assertThat(healthEntityBuilder.build()).isNotNull();
     }
 }

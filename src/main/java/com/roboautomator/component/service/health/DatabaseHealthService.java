@@ -59,8 +59,6 @@ public class DatabaseHealthService implements IHealthService {
 
         log.info("RetrievedHealthEntity {}", healthEntity);
 
-        return healthEntity
-            .map(entity -> (entity.getId() != null))
-            .orElse(false);
+        return healthEntity.isPresent();
     }
 }

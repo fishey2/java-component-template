@@ -43,4 +43,18 @@ public class MessageEntityTest {
         assertThat(messageEntity.toString()).contains("id=" + testId);
         assertThat(messageEntity.toString()).contains("message=" + testMessage);
     }
+
+    @Test
+    void shouldBuildMessageEntity() {
+        var testMessage = "test-message";
+        var testId = UUID.randomUUID();
+        var messageEntityBuilder = MessageEntity
+            .builder()
+            .id(testId)
+            .message(testMessage);
+
+        assertThat(messageEntityBuilder.toString()).contains("id=" + testId);
+        assertThat(messageEntityBuilder.toString()).contains("message=" + testMessage);
+        assertThat(messageEntityBuilder.build()).isNotNull();
+    }
 }
