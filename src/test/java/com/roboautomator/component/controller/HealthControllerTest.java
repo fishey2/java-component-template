@@ -1,7 +1,7 @@
 package com.roboautomator.component.controller;
 
 import com.roboautomator.component.MainApplication;
-import com.roboautomator.component.service.HealthService;
+import com.roboautomator.component.service.health.HealthService;
 import com.roboautomator.component.util.AbstractMockMvcTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

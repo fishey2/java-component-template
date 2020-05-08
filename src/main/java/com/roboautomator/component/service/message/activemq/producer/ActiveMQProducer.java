@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class ActiveMQProducer implements QueueProducer<String> {
 
-    private static Logger log = LoggerFactory.getLogger(ActiveMQProducer.class);
+    private static final Logger log = LoggerFactory.getLogger(ActiveMQProducer.class);
 
     private static final String QUEUE_NAME = "testQueue";
 

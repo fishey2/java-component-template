@@ -1,5 +1,6 @@
 package com.roboautomator.component;
 
+import com.roboautomator.component.service.health.HealthService;
 import com.roboautomator.component.util.AbstractMockMvcTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,9 +10,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,8 +29,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class MainApplicationTest extends AbstractMockMvcTest {
 
+    @MockBean
+    private HealthService healthService;
+
     @Test
     void testHealthEndpointRouting() throws Exception {
+        doReturn(true).when(healthService).isHealthOk();
+
         mockMvc.perform(get("/health"))
                 .andExpect(status().is(200))
                 .andExpect(content().string("{}"));

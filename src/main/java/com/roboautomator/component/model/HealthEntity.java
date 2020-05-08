@@ -1,14 +1,16 @@
 package com.roboautomator.component.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Component
-@Getter @Setter @NoArgsConstructor
-public class HealthEntity {
-
-    private boolean healthOk = true;
-
+@Entity(name = "Health")
+@Table(name = "health")
+@ToString(callSuper = true)
+@Getter
+@SuperBuilder
+@NoArgsConstructor
+public class HealthEntity extends DefaultEntity{
+    // Default Only
 }

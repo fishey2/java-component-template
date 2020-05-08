@@ -1,27 +1,41 @@
 package com.roboautomator.component.model;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.time.OffsetDateTime;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HealthEntityTest {
 
-    private HealthEntity health;
+    private static final UUID TEST_ID = UUID.randomUUID();
+    private static final OffsetDateTime TEST_CREATED_AT = OffsetDateTime.now().plusSeconds(1L);
+    private static final OffsetDateTime TEST_UPDATED_AT = OffsetDateTime.now().plusSeconds(2L);
 
-    @BeforeEach
-    public void beforeEach() {
-        health = new HealthEntity();
+    @Test
+    void shouldBeAbleToBuildNewHealthEntityUsingBuilder() {
+        var healthEntity = HealthEntity.builder()
+            .id(TEST_ID)
+            .createdAt(TEST_CREATED_AT)
+            .updatedAt(TEST_UPDATED_AT)
+            .build();
+
+        assertThat(healthEntity.getId()).isEqualTo(TEST_ID);
+        assertThat(healthEntity.getCreatedAt()).isEqualTo(TEST_CREATED_AT);
+        assertThat(healthEntity.getUpdatedAt()).isEqualTo(TEST_UPDATED_AT);
     }
 
     @Test
-    void testHealthDefaultValueIsOk() {
-        assertThat(health.isHealthOk()).isTrue();
-    }
+    void shouldHaveAllValuesInToStringMethod() {
+        var healthEntityString = HealthEntity.builder()
+            .id(TEST_ID)
+            .createdAt(TEST_CREATED_AT)
+            .updatedAt(TEST_UPDATED_AT)
+            .build()
+            .toString();
 
-    @Test
-    void testSetHealthOverridesDefaultValue() {
-        health.setHealthOk(false);
-        assertThat(health.isHealthOk()).isFalse();
+        assertThat(healthEntityString).contains("id=" + TEST_ID.toString());
+        assertThat(healthEntityString).contains("updatedAt=" + TEST_UPDATED_AT.toString());
+        assertThat(healthEntityString).contains("createdAt=" + TEST_CREATED_AT.toString());
     }
 }

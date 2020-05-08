@@ -17,7 +17,7 @@ import static com.roboautomator.component.util.StringHelper.cleanString;
 @Component
 public class CorrelationMiddleware extends HandlerInterceptorAdapter {
 
-    private static Logger log = LoggerFactory.getLogger(CorrelationMiddleware.class);
+    private static final Logger log = LoggerFactory.getLogger(CorrelationMiddleware.class);
 
     private static final String X_CORRELATION_ID = "X-Correlation-Id";
     private static final String LOG_CORRELATION_ID = "correlationId";
