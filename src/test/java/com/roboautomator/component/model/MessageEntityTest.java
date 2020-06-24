@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MessageEntityTest {
+class MessageEntityTest {
 
     @Test
     void shouldBeAbleToBuildNewEntityUsingBuilder() {

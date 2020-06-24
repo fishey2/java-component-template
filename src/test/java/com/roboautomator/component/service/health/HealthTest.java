@@ -3,7 +3,7 @@ package com.roboautomator.component.service.health;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 
-public class HealthTest {
+class HealthTest {
 
     @Test
     void shouldBuildHealth() {

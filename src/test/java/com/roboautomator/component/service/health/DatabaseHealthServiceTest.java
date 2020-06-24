@@ -18,7 +18,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class DatabaseHealthServiceTest extends AbstractLoggingTest<DatabaseHealthService> {
+class DatabaseHealthServiceTest extends AbstractLoggingTest<DatabaseHealthService> {
 
     @Mock
     private HealthRepository healthRepository;
@@ -52,9 +52,10 @@ public class DatabaseHealthServiceTest extends AbstractLoggingTest<DatabaseHealt
 
         var serviceHealthString = new DatabaseHealthService(healthRepository, entityManager).getServiceHealth().toString();
 
-        assertThat(serviceHealthString).contains("alive=true");
-        assertThat(serviceHealthString).contains("readable=true");
-        assertThat(serviceHealthString).contains("writable=true");
+        assertThat(serviceHealthString)
+            .contains("alive=true")
+            .contains("readable=true")
+            .contains("writable=true");
     }
 
     @Test
@@ -66,9 +67,10 @@ public class DatabaseHealthServiceTest extends AbstractLoggingTest<DatabaseHealt
 
         var serviceHealthString = new DatabaseHealthService(healthRepository, entityManager).getServiceHealth().toString();
 
-        assertThat(serviceHealthString).contains("alive=false");
-        assertThat(serviceHealthString).contains("readable=true");
-        assertThat(serviceHealthString).contains("writable=true");
+        assertThat(serviceHealthString)
+            .contains("alive=false")
+            .contains("readable=true")
+            .contains("writable=true");
     }
 
     @Test
@@ -79,9 +81,10 @@ public class DatabaseHealthServiceTest extends AbstractLoggingTest<DatabaseHealt
 
         var serviceHealthString = new DatabaseHealthService(healthRepository, entityManager).getServiceHealth().toString();
 
-        assertThat(serviceHealthString).contains("alive=true");
-        assertThat(serviceHealthString).contains("readable=true");
-        assertThat(serviceHealthString).contains("writable=false");
+        assertThat(serviceHealthString)
+            .contains("alive=true")
+            .contains("readable=true")
+            .contains("writable=false");
     }
 
     @Test
@@ -92,9 +95,10 @@ public class DatabaseHealthServiceTest extends AbstractLoggingTest<DatabaseHealt
 
         var serviceHealthString = new DatabaseHealthService(healthRepository, entityManager).getServiceHealth().toString();
 
-        assertThat(serviceHealthString).contains("alive=true");
-        assertThat(serviceHealthString).contains("readable=false");
-        assertThat(serviceHealthString).contains("writable=true");
+        assertThat(serviceHealthString)
+            .contains("alive=true")
+            .contains("readable=false")
+            .contains("writable=true");
     }
 
     @Test

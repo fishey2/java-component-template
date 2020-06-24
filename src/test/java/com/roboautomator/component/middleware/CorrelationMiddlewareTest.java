@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
-public class CorrelationMiddlewareTest extends AbstractLoggingTest<CorrelationMiddleware> {
+class CorrelationMiddlewareTest extends AbstractLoggingTest<CorrelationMiddleware> {
 
     private static final String UUID_PATTERN = "^[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$";
     private static final String REQUEST_CORRELATION_ID = "523fbdeb-a905-47e7-b453-42a5a470e43b";

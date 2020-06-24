@@ -1,5 +1,6 @@
 package com.roboautomator.component.service.message;
 
+import javax.jms.JMSException;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -22,5 +23,5 @@ public interface QueueConsumer<T> {
      * @param session    - The session information ({@link Session})
      */
     void handleMessage(@Payload T message, @Headers MessageHeaders headers,
-                               Message rawMessage, Session session);
+                               Message rawMessage, Session session) throws JMSException;
 }

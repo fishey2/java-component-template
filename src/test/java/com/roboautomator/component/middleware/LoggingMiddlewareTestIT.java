@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class LoggingMiddlewareTestIT {
+class LoggingMiddlewareTestIT {
 
     @MockBean
     private LoggingMiddleware loggingMiddleware;

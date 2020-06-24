@@ -5,6 +5,7 @@ import com.roboautomator.component.service.message.QueueProducer;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +41,9 @@ public class ActiveMQProducer implements QueueProducer<String> {
     @Override
     public void sendMessage(String message) {
         log.info("Sending message \"{}\" to the \"{}\" queue", message, QUEUE_NAME);
-        jmsTemplate.convertAndSend(QUEUE_NAME, message);
+        jmsTemplate.convertAndSend(QUEUE_NAME, message, msg -> {
+            msg.setJMSCorrelationID(MDC.get("correlationId"));
+            return msg;
+        });
     }
 }

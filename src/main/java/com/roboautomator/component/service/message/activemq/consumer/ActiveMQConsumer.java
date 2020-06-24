@@ -1,21 +1,21 @@
 package com.roboautomator.component.service.message.activemq.consumer;
 
+import static com.roboautomator.component.util.StringHelper.cleanString;
 import com.roboautomator.component.model.MessageEntity;
 import com.roboautomator.component.repository.MessageRepository;
 import com.roboautomator.component.service.message.QueueConsumer;
-import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.UUID;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.Session;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
-
-import javax.jms.Session;
-import javax.jms.Message;
-
-import static com.roboautomator.component.util.StringHelper.cleanString;
 
 /**
  * <p><b>Simple consumer for ActiveMQ</b></p>
@@ -30,38 +30,47 @@ import static com.roboautomator.component.util.StringHelper.cleanString;
  *     <li>spring.activemq.password</li>
  * </ul>
  */
+@Slf4j
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ActiveMQConsumer implements QueueConsumer<String> {
 
-    private static Logger log = LoggerFactory.getLogger(ActiveMQConsumer.class);
-
     private static final String QUEUE_NAME = "testQueue";
-    private static final String LOG_SEPARATOR = "- - - - - - - - - - - - - - - - - - - - - - - -";
 
-    private MessageRepository messageRepository;
+    private static final String UUID_PATTERN = "[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}";
+
+    private final MessageRepository messageRepository;
 
     @Override
     @JmsListener(destination = QUEUE_NAME)
     public void handleMessage(@Payload String message, @Headers MessageHeaders headers,
-                               Message rawMessage, Session session) {
+                              Message rawMessage, Session session) {
 
         var cleanMessage = cleanString(message);
 
+        var correlationId = extractCorrelationId(rawMessage);
+
+        MDC.put("correlationId", correlationId.toString());
+
         var messageEntity = MessageEntity.builder()
-                .message(cleanMessage)
-                .build();
+            .message(cleanMessage)
+            .correlationId(correlationId)
+            .build();
 
-        messageRepository.saveAndFlush(messageEntity);
+        messageRepository.save(messageEntity);
+    }
 
-        log.info("received <{}>", cleanMessage);
+    private UUID extractCorrelationId(Message jmsMessage) {
+        try {
+            var correlationId = jmsMessage.getJMSCorrelationID();
 
-        log.info(LOG_SEPARATOR);
-        log.info("######          Message Details           #####");
-        log.info(LOG_SEPARATOR);
-        log.info("headers: {}", headers);
-        log.info("rawMessage: {}", rawMessage);
-        log.info("session: {}", session);
-        log.info(LOG_SEPARATOR);
+            return correlationId != null && correlationId.matches(UUID_PATTERN)
+                ? UUID.fromString(correlationId)
+                : UUID.randomUUID();
+
+        } catch (JMSException exception) {
+            log.info("Could not extract JMSCorrelationID, generated new UUID");
+            return UUID.randomUUID();
+        }
     }
 }

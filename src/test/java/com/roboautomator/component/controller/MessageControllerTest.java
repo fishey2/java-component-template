@@ -2,9 +2,12 @@ package com.roboautomator.component.controller;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.spi.ILoggingEvent;
+import com.roboautomator.component.repository.MessageRepository;
 import com.roboautomator.component.service.message.activemq.producer.ActiveMQProducer;
 
 import com.roboautomator.component.util.AbstractLoggingTest;
+import java.util.Optional;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,25 +24,29 @@ import javax.jms.MessageNotWriteableException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.BDDMockito.willReturn;
 import static org.mockito.BDDMockito.willThrow;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MessageController.class)
 @AutoConfigureMockMvc
-public class MessageControllerTest extends AbstractLoggingTest<MessageController> {
+class MessageControllerTest extends AbstractLoggingTest<MessageController> {
 
     private static final String TEST_ENDPOINT = "/message";
 
     @MockBean
     private ActiveMQProducer activeMQProducer;
+    @MockBean
+    private MessageRepository messageRepository;
 
     private MockMvc mockMvc;
 
     @BeforeEach
     void setupMockMvc() {
-        var messageController = new MessageController(activeMQProducer);
+        var messageController = new MessageController(messageRepository, activeMQProducer);
         setupLoggingAppender(messageController);
         mockMvc = MockMvcBuilders.standaloneSetup(messageController).build();
     }
@@ -120,6 +127,18 @@ public class MessageControllerTest extends AbstractLoggingTest<MessageController
         assertThat(getLoggingEventListAppender().list)
                 .extracting(ILoggingEvent::getFormattedMessage)
                 .contains("Could not process the message \"error\", returning");
+    }
 
+    @Test
+    void shouldReturn404NotFoundIfCorrelationIdNotFound() throws Exception {
+        var correlationId = UUID.randomUUID();
+
+        willReturn(Optional.empty())
+            .given(messageRepository)
+            .findAllByCorrelationId(correlationId);
+
+        mockMvc
+            .perform(get(TEST_ENDPOINT + "/" + correlationId))
+            .andExpect(status().isNotFound());
     }
 }

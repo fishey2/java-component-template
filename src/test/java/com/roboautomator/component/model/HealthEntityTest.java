@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HealthEntityTest {
+class HealthEntityTest {
 
     private static final UUID TEST_ID = UUID.randomUUID();
     private static final OffsetDateTime TEST_CREATED_AT = OffsetDateTime.now().plusSeconds(1L);
@@ -35,9 +35,10 @@ public class HealthEntityTest {
             .build()
             .toString();
 
-        assertThat(healthEntityString).contains("id=" + TEST_ID.toString());
-        assertThat(healthEntityString).contains("updatedAt=" + TEST_UPDATED_AT.toString());
-        assertThat(healthEntityString).contains("createdAt=" + TEST_CREATED_AT.toString());
+        assertThat(healthEntityString)
+            .contains("id=" + TEST_ID.toString())
+            .contains("updatedAt=" + TEST_UPDATED_AT.toString())
+            .contains("createdAt=" + TEST_CREATED_AT.toString());
     }
 
     @Test
@@ -48,9 +49,11 @@ public class HealthEntityTest {
             .createdAt(TEST_CREATED_AT)
             .updatedAt(TEST_UPDATED_AT);
 
-        assertThat(healthEntityBuilder.toString()).contains("id=" + TEST_ID);
-        assertThat(healthEntityBuilder.toString()).contains("updatedAt=" + TEST_UPDATED_AT);
-        assertThat(healthEntityBuilder.toString()).contains("createdAt=" + TEST_CREATED_AT);
+        assertThat(healthEntityBuilder.toString())
+            .contains("id=" + TEST_ID)
+            .contains("updatedAt=" + TEST_UPDATED_AT)
+            .contains("createdAt=" + TEST_CREATED_AT);
+
         assertThat(healthEntityBuilder.build()).isNotNull();
     }
 }

@@ -1,6 +1,7 @@
 package com.roboautomator.component.util;
 
 import com.roboautomator.component.repository.HealthRepository;
+import com.roboautomator.component.repository.MessageRepository;
 import com.roboautomator.component.service.message.activemq.consumer.ActiveMQConsumer;
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public abstract class AbstractMockMvcTest {
 
     @MockBean
     private HealthRepository healthRepository;
+
+    @MockBean
+    private MessageRepository messageRepository;
 
     @MockBean
     private EntityManager entityManager;

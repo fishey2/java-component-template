@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class HealthRepositoryTestIT {
+class HealthRepositoryTestIT {
 
     @Autowired
     private DataSource dataSource;
@@ -54,7 +54,7 @@ public class HealthRepositoryTestIT {
     void shouldFindEntityById() {
         var message = healthRepository.findById(healthEntity.getId());
 
-        assertThat(message.isPresent()).isTrue();
+        assertThat(message).isPresent();
 
         assertThat(message.get().getUpdatedAt()).isEqualTo(healthEntity.getUpdatedAt());
         assertThat(message.get().getCreatedAt()).isEqualTo(healthEntity.getCreatedAt());

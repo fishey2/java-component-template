@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static com.roboautomator.component.util.StringHelper.cleanString;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StringHelperTest {
+class StringHelperTest {
 
     @Test
     void shouldRemoveNewlineCharacters() {

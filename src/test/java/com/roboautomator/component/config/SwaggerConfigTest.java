@@ -7,7 +7,7 @@ import springfox.documentation.spi.DocumentationType;
 import static com.roboautomator.component.config.SwaggerConfig.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SwaggerConfigTest {
+class SwaggerConfigTest {
 
     private SwaggerConfig testConfig;
 

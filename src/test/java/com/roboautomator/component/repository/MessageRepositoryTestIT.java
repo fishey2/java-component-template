@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class MessageRepositoryTestIT {
+class MessageRepositoryTestIT {
 
     @Autowired
     private DataSource dataSource;
@@ -57,7 +57,7 @@ public class MessageRepositoryTestIT {
     void shouldFindEntityById() {
         var message = messageRepository.findById(messageEntity.getId());
 
-        assertThat(message.isPresent()).isTrue();
+        assertThat(message).isPresent();
 
         assertThat(message.get().getMessage()).isEqualTo("Hello");
     }

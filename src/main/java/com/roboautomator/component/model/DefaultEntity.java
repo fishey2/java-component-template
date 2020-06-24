@@ -22,6 +22,8 @@ public abstract class DefaultEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    private UUID correlationId;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
     private OffsetDateTime createdAt;

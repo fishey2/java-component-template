@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         HibernateJpaAutoConfiguration.class
 })
 @AutoConfigureMockMvc
-public class MainApplicationTest extends AbstractMockMvcTest {
+class MainApplicationTest extends AbstractMockMvcTest {
 
     @MockBean
     private HealthService healthService;

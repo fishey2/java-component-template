@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class CorrelationMiddlewareTestIT {
+class CorrelationMiddlewareTestIT {
 
     @MockBean
     private CorrelationMiddleware correlationMiddleware;

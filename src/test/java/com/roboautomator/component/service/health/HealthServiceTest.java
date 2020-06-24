@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.willReturn;
 
 @ExtendWith(MockitoExtension.class)
-public class HealthServiceTest extends AbstractLoggingTest<HealthService> {
+class HealthServiceTest extends AbstractLoggingTest<HealthService> {
 
     @Mock
     private DatabaseHealthService databaseHealthService;

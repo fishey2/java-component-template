@@ -12,6 +12,7 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.times;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = ActiveMQProducer.class)
-public class ActiveMQProducerTest extends AbstractLoggingTest<ActiveMQProducer> {
+class ActiveMQProducerTest extends AbstractLoggingTest<ActiveMQProducer> {
 
     @MockBean
     private JmsTemplate jmsTemplate;
@@ -37,7 +38,7 @@ public class ActiveMQProducerTest extends AbstractLoggingTest<ActiveMQProducer> 
         activeMQProducer.sendMessage("Message");
 
         verify(jmsTemplate, times(1))
-                .convertAndSend(anyString(), eq("Message"));
+                .convertAndSend(anyString(), eq("Message"), any());
     }
 
     @Test
@@ -45,7 +46,7 @@ public class ActiveMQProducerTest extends AbstractLoggingTest<ActiveMQProducer> 
         activeMQProducer.sendMessage("Any");
 
         verify(jmsTemplate, times(1))
-                .convertAndSend(eq("testQueue"), anyString());
+                .convertAndSend(eq("testQueue"), anyString(), any());
     }
 
     @Test
