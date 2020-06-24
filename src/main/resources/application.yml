@@ -1,3 +1,14 @@
+server:
+  port: 8080
+management:
+  server:
+    port: 8081
+  endpoint:
+    info:
+      enabled: false
+    health:
+      show-details: always
+
 spring:
   main:
     banner-mode: off

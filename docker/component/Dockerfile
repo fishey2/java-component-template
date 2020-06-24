@@ -7,5 +7,6 @@ COPY ${JAR_FILE} app.jar
 ENV SPRING_PROFILES_ACTIVE prod
 
 EXPOSE 8080
+EXPOSE 8081
 
 ENTRYPOINT ["java","-jar","/app.jar"]
