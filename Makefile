@@ -38,13 +38,13 @@ test: _setUpGradle
 testIntegration: _setUpGradle _testComposeUp
 	echo "Running Integration tests"
 	./gradlew testIntegration
-	make _testComposeDown
+	#make _testComposeDown
 
 testFunctional: _setUpGradle _functionalComposeUp
 	make _waitForLocalService
 	echo "Running Functional tests"
 	./gradlew testFunctional
-	make _functionalComposeDown
+	#make _functionalComposeDown
 
 analyseWithJacoco: _setUpGradle
 	echo "Running jacoco analysis"

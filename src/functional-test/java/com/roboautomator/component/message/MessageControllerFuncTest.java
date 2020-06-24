@@ -1,6 +1,5 @@
 package com.roboautomator.component.message;
 
-import com.roboautomator.component.view.Message;
 import io.restassured.http.Header;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
@@ -12,12 +11,17 @@ import static org.hamcrest.Matchers.equalTo;
 public class MessageControllerFuncTest {
 
     private static final String X_CORRELATION_ID = "X-Correlation-Id";
+    private static final String CONTENT_TYPE = "Content-Type";
+
     private static final String MESSAGE_URL = "http://localhost:8080/message";
 
     @Test
     public void checkMessageEndpointPostRequestReturns200() {
+        var contentType = new Header(CONTENT_TYPE, "application/json");
+
         given()
-                .body("Hello")
+                .header(contentType)
+                .body("{ \"messageBody\": \"Hello\" }")
                 .when()
                 .post(MESSAGE_URL)
                 .then()
@@ -36,10 +40,12 @@ public class MessageControllerFuncTest {
 
     @Test
     public void returnsTheSameCorrelationIdAsSent() {
-        Header header = new Header(X_CORRELATION_ID, "correlation-id");
+        var correlationId = new Header(X_CORRELATION_ID, "correlation-id");
+        var contentType = new Header(CONTENT_TYPE, "application/json");
 
         given()
-                .header(header)
+                .header(correlationId)
+                .header(contentType)
                 .body("Hello")
                 .when()
                 .post(MESSAGE_URL)
@@ -51,12 +57,13 @@ public class MessageControllerFuncTest {
     public void retrieveSameMessageAsSent() {
 
         var correlationId = UUID.randomUUID();
-        Header header = new Header(X_CORRELATION_ID, correlationId.toString());
-
-        var messageSent = "Hello - retrieveSameMessageAsSent";
+        var correlationHeader = new Header(X_CORRELATION_ID, correlationId.toString());
+        var contentType = new Header(CONTENT_TYPE, "application/json");
+        var messageSent = "{ \"messageBody\": \"Hello - retrieveSameMessageAsSent\" }";
 
         given()
-            .header(header)
+            .header(correlationHeader)
+            .header(contentType)
             .body(messageSent)
             .when()
             .post(MESSAGE_URL)
@@ -64,12 +71,12 @@ public class MessageControllerFuncTest {
             .header(X_CORRELATION_ID, correlationId.toString());
 
         var expectedResponse = Message.builder()
-            .messageBody(messageSent)
+            .messageBody("Hello - retrieveSameMessageAsSent")
             .correlationId(correlationId)
             .build();
 
         given()
-            .header(header)
+            .header(correlationHeader)
             .get(MESSAGE_URL + "/" + correlationId.toString())
             .then()
             .body("messageBody", equalTo(expectedResponse.getMessageBody()))
