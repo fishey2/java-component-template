@@ -37,8 +37,7 @@ public class HealthActuatorFuncTest {
             .statusCode(200)
             .body("components.db.status", equalTo("UP"))
             .body("components.db.details.database", equalTo("PostgreSQL"))
-            .body("components.db.details.result", equalTo(1))
-            .body("components.db.details.validationQuery", equalTo("SELECT 1"));
+            .body("components.db.details.validationQuery", equalTo("isValid()"));
     }
 
     @Test

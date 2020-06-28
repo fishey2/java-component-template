@@ -1,7 +1,7 @@
 # DOCKER RELATED STEPS
 _testComposeUp:
 	echo "Bringing up test docker dependencies"
-	docker-compose up -d
+	docker-compose up -d --remove-orphans
 
 _testComposeDown:
 	echo "Tearing down test docker dependencies"
@@ -13,7 +13,7 @@ _functionalComposeBuild: package
 
 _functionalComposeUp: _functionalComposeBuild
 	echo "Building docker image"
-	docker-compose -f docker-compose-test.yml up -d
+	docker-compose -f docker-compose-test.yml up -d --remove-orphans
 
 _functionalComposeDown:
 	echo "Bringing down the docker containers [functional]"
