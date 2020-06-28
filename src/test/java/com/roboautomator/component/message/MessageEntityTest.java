@@ -1,12 +1,9 @@
 package com.roboautomator.component.message;
 
-import com.roboautomator.component.message.MessageEntity;
-import org.junit.jupiter.api.Test;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import java.time.OffsetDateTime;
 import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 class MessageEntityTest {
 
@@ -18,12 +15,12 @@ class MessageEntityTest {
         var updatedAt = OffsetDateTime.now().plusDays(1L);
 
         var messageEntity = MessageEntity
-                .builder()
-                .id(testId)
-                .message(testMessage)
-                .createdAt(createdAt)
-                .updatedAt(updatedAt)
-                .build();
+            .builder()
+            .id(testId)
+            .message(testMessage)
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .build();
 
         assertThat(messageEntity.getId()).isEqualTo(testId);
         assertThat(messageEntity.getMessage()).isEqualTo(testMessage);
@@ -36,10 +33,10 @@ class MessageEntityTest {
         var testMessage = "test-message";
         var testId = UUID.randomUUID();
         var messageEntity = MessageEntity
-                .builder()
-                .id(testId)
-                .message(testMessage)
-                .build();
+            .builder()
+            .id(testId)
+            .message(testMessage)
+            .build();
 
         assertThat(messageEntity.toString()).contains("id=" + testId);
         assertThat(messageEntity.toString()).contains("message=" + testMessage);

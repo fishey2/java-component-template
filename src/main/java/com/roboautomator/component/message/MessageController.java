@@ -2,7 +2,6 @@ package com.roboautomator.component.message;
 
 import static com.roboautomator.component.util.StringHelper.cleanString;
 import java.util.UUID;
-import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

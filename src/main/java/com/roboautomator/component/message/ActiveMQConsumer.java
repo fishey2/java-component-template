@@ -1,8 +1,6 @@
 package com.roboautomator.component.message;
 
 import static com.roboautomator.component.util.StringHelper.cleanString;
-import com.roboautomator.component.message.MessageEntity;
-import com.roboautomator.component.message.MessageRepository;
 import com.roboautomator.component.QueueConsumer;
 import java.util.UUID;
 import javax.jms.JMSException;

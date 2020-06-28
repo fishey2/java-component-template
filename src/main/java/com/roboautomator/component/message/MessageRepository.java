@@ -1,6 +1,5 @@
 package com.roboautomator.component.message;
 
-import com.roboautomator.component.message.MessageEntity;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
