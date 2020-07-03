@@ -1,5 +1,6 @@
 package com.roboautomator.component.patient;
 
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,9 +13,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PatientUpdate {
+
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String firstName;
+
     private String middleNames;
+
+    @NotBlank
     private String lastName;
 
     public PatientEntity toPatientEntity(String patientNumber) {

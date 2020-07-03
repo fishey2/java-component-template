@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = PatientController.class)
 @AutoConfigureMockMvc
-public class PatientContollerAdviceTest extends AbstractMockMvcTest {
+public class PatientControllerAdviceTest extends AbstractMockMvcTest {
 
     private static final String TEST_ENDPOINT = "/patient";
 
@@ -30,6 +30,13 @@ public class PatientContollerAdviceTest extends AbstractMockMvcTest {
 
     private static final String VALID_PATIENT_UPDATE = "{" +
         " \"title\": \"" + TEST_TITLE + "\"," +
+        " \"firstName\": \"" + TEST_FIRST_NAME + "\"," +
+        " \"middleNames\": \"" + TEST_MIDDLE_NAMES + "\"," +
+        " \"lastName\": \"" + TEST_LAST_NAME + "\" " +
+        "}";
+
+    private static final String BLANK_TITLE_PATIENT_UPDATE = "{" +
+        " \"title\": \" \"," +
         " \"firstName\": \"" + TEST_FIRST_NAME + "\"," +
         " \"middleNames\": \"" + TEST_MIDDLE_NAMES + "\"," +
         " \"lastName\": \"" + TEST_LAST_NAME + "\" " +
@@ -94,5 +101,77 @@ public class PatientContollerAdviceTest extends AbstractMockMvcTest {
             .andReturn();
 
         verifyNoInteractions(patientRepository);
+    }
+
+    @Test
+    void shouldReturn404WhenPatientTitleIsBlank() throws Exception {
+        var patientNumber = "1234567890";
+
+        var response = mockMvc.perform(post(TEST_ENDPOINT + "/" + patientNumber)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(BLANK_TITLE_PATIENT_UPDATE))
+            .andExpect(status().isBadRequest())
+            .andReturn();
+
+        verifyNoInteractions(patientRepository);
+
+        var responseAsString = response.getResponse().getContentAsString();
+
+        assertThat(responseAsString).isNotNull();
+        assertThat(JsonPath.<String>read(responseAsString, "$.message")).isEqualTo("Validation failed");
+        assertThat(JsonPath.<String>read(responseAsString, "$.errors[0].field")).isEqualTo("title");
+        assertThat(JsonPath.<String>read(responseAsString, "$.errors[0].error")).contains("must not be blank");
+    }
+
+    @Test
+    void shouldReturn404WhenPatientFirstNameIsBlank() throws Exception {
+        var patientNumber = "1234567890";
+        var payload = "{" +
+            " \"title\": \"" + TEST_TITLE +"\"," +
+            " \"firstName\": \" \"," +
+            " \"middleNames\": \"" + TEST_MIDDLE_NAMES + "\"," +
+            " \"lastName\": \"" + TEST_LAST_NAME + "\" " +
+            "}";
+
+        var response = mockMvc.perform(post(TEST_ENDPOINT + "/" + patientNumber)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(payload))
+            .andExpect(status().isBadRequest())
+            .andReturn();
+
+        verifyNoInteractions(patientRepository);
+
+        var responseAsString = response.getResponse().getContentAsString();
+
+        assertThat(responseAsString).isNotNull();
+        assertThat(JsonPath.<String>read(responseAsString, "$.message")).isEqualTo("Validation failed");
+        assertThat(JsonPath.<String>read(responseAsString, "$.errors[0].field")).isEqualTo("firstName");
+        assertThat(JsonPath.<String>read(responseAsString, "$.errors[0].error")).contains("must not be blank");
+    }
+
+    @Test
+    void shouldReturn404WhenPatientLastNameIsBlank() throws Exception {
+        var patientNumber = "1234567890";
+        var payload = "{" +
+            " \"title\": \"" + TEST_TITLE +"\"," +
+            " \"firstName\": \"" + TEST_FIRST_NAME + "\"," +
+            " \"middleNames\": \"" + TEST_MIDDLE_NAMES + "\"," +
+            " \"lastName\": \" \" " +
+            "}";
+
+        var response = mockMvc.perform(post(TEST_ENDPOINT + "/" + patientNumber)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(payload))
+            .andExpect(status().isBadRequest())
+            .andReturn();
+
+        verifyNoInteractions(patientRepository);
+
+        var responseAsString = response.getResponse().getContentAsString();
+
+        assertThat(responseAsString).isNotNull();
+        assertThat(JsonPath.<String>read(responseAsString, "$.message")).isEqualTo("Validation failed");
+        assertThat(JsonPath.<String>read(responseAsString, "$.errors[0].field")).isEqualTo("lastName");
+        assertThat(JsonPath.<String>read(responseAsString, "$.errors[0].error")).contains("must not be blank");
     }
 }

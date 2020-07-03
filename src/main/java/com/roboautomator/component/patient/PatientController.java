@@ -1,5 +1,6 @@
 package com.roboautomator.component.patient;
 
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,7 @@ public class PatientController {
 
     @PostMapping(value = "/{patientNumber}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public void createOrUpdatePatient(@PathVariable String patientNumber, @RequestBody PatientUpdate patientUpdate) {
+    public void createOrUpdatePatient(@PathVariable String patientNumber, @Valid @RequestBody PatientUpdate patientUpdate) {
 
         if (!isValidPatientNumber(patientNumber)) {
             throw new PatientControllerValidationException("The path parameter \"patientNumber\" should be 10 numbers exactly", "patientNumber");
