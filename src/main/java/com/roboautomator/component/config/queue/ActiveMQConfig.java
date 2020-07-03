@@ -1,5 +1,6 @@
 package com.roboautomator.component.config.queue;
 
+import java.util.List;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.ActiveMQSslConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,8 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
-
-import java.util.Collections;
 
 @Configuration
 public class ActiveMQConfig implements QueueConfig {
@@ -33,7 +32,8 @@ public class ActiveMQConfig implements QueueConfig {
      *
      * <p><b>Trusted Packages:</b>
      * <ul>
-     *     <li>com.roboautomator.component.model</li>
+     *     <li>com.roboautomator.component.message</li>
+     *     <li>com.roboautomator.component.patient</li>
      * </ul></p>
      *
      * @return the {@link ActiveMQConnectionFactory} to be used.
@@ -48,7 +48,10 @@ public class ActiveMQConfig implements QueueConfig {
         activeMQConnectionFactory.setUserName(user);
         activeMQConnectionFactory.setPassword(password);
 
-        activeMQConnectionFactory.setTrustedPackages(Collections.singletonList("com.roboautomator.component.model"));
+        activeMQConnectionFactory.setTrustedPackages(List.of(
+            "com.roboautomator.component.message",
+            "com.roboautomator.component.patient"
+            ));
 
         return activeMQConnectionFactory;
     }

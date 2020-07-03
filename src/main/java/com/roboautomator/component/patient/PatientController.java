@@ -22,8 +22,17 @@ public class PatientController {
     @PostMapping(value = "/{patientNumber}", produces = "application/json")
     @ResponseStatus(HttpStatus.OK)
     public void createOrUpdatePatient(@PathVariable String patientNumber, @RequestBody PatientUpdate patientUpdate) {
+
+        if (!isValidPatientNumber(patientNumber)) {
+            throw new PatientControllerValidationException("The path parameter \"patientNumber\" should be 10 numbers exactly", "patientNumber");
+        }
+
         log.info("Received request to create or update patient with patient number \"{}\"", patientNumber);
         patientRepository.save(getOrCreateEntity(patientNumber, patientUpdate));
+    }
+
+    private boolean isValidPatientNumber(String patientNumber) {
+        return patientNumber.matches("^[0-9]{10}$");
     }
 
     private PatientEntity getOrCreateEntity(String patientNumber, PatientUpdate patientUpdate) {
