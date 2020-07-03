@@ -1,6 +1,6 @@
 package com.roboautomator.component.patient;
 
-import com.roboautomator.component.util.ValidationException;
+import com.roboautomator.component.util.ValidationError;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class PatientControllerAdvice {
     public ResponseEntity<PatientExceptionResponse> handlePatientControllerValidationException(
         PatientControllerValidationException validationException) {
 
-        var errors = List.of(new ValidationException(validationException.getField(), validationException.getMessage()));
+        var errors = List.of(new ValidationError(validationException.getField(), validationException.getMessage()));
 
         return ResponseEntity.badRequest().body(getValidationFailedResponse(errors));
     }
@@ -28,18 +28,18 @@ public class PatientControllerAdvice {
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseEntity<PatientExceptionResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
 
-        var errors = new ArrayList<ValidationException>();
+        var errors = new ArrayList<ValidationError>();
 
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
-            errors.add(new ValidationException(fieldName, errorMessage));
+            errors.add(new ValidationError(fieldName, errorMessage));
         });
 
         return ResponseEntity.badRequest().body(getValidationFailedResponse(errors));
     }
 
-    private PatientExceptionResponse getValidationFailedResponse(List<ValidationException> errors) {
+    private PatientExceptionResponse getValidationFailedResponse(List<ValidationError> errors) {
         return PatientExceptionResponse.builder()
             .message("Validation failed")
             .errors(errors)

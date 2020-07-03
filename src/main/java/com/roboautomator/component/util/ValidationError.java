@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public class ValidationException {
+public class ValidationError {
     private final String field;
     private final String error;
 }

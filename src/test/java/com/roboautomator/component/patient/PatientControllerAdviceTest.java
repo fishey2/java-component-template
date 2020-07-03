@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = PatientController.class)
 @AutoConfigureMockMvc
-public class PatientControllerAdviceTest extends AbstractMockMvcTest {
+class PatientControllerAdviceTest extends AbstractMockMvcTest {
 
     private static final String TEST_ENDPOINT = "/patient";
 
