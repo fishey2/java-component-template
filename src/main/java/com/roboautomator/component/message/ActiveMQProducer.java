@@ -1,10 +1,9 @@
 package com.roboautomator.component.message;
 
-import com.roboautomator.component.config.queue.ActiveMQConfig;
 import com.roboautomator.component.QueueProducer;
+import com.roboautomator.component.config.queue.ActiveMQConfig;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Component;
@@ -28,11 +27,10 @@ import org.springframework.stereotype.Component;
  * <p>An example implementation of usage can be found in
  * {@link MessageController}</p>
  */
+@Slf4j
 @Component
 @AllArgsConstructor
 public class ActiveMQProducer implements QueueProducer<String> {
-
-    private static final Logger log = LoggerFactory.getLogger(ActiveMQProducer.class);
 
     private static final String QUEUE_NAME = "testQueue";
 

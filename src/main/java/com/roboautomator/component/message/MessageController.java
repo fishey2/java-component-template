@@ -3,8 +3,7 @@ package com.roboautomator.component.message;
 import static com.roboautomator.component.util.StringHelper.cleanString;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.JmsException;
@@ -15,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/message")
 @AllArgsConstructor
 public class MessageController {
-
-    private static final Logger log = LoggerFactory.getLogger(MessageController.class);
 
     private final MessageRepository messageRepository;
     private final ActiveMQProducer producer;

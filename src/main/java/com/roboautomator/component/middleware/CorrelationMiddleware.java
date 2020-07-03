@@ -1,23 +1,19 @@
 package com.roboautomator.component.middleware;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.roboautomator.component.util.StringHelper.cleanString;
+import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
-
-import static com.roboautomator.component.util.StringHelper.cleanString;
-
+@Slf4j
 @Component
 public class CorrelationMiddleware extends HandlerInterceptorAdapter {
-
-    private static final Logger log = LoggerFactory.getLogger(CorrelationMiddleware.class);
 
     private static final String X_CORRELATION_ID = "X-Correlation-Id";
     private static final String LOG_CORRELATION_ID = "correlationId";
@@ -42,8 +38,8 @@ public class CorrelationMiddleware extends HandlerInterceptorAdapter {
 
     private String extractOrGenerateCorrelationId(HttpServletRequest request) {
         return (request.getHeader(X_CORRELATION_ID) == null || request.getHeader(X_CORRELATION_ID).isEmpty())
-                ? generateCorrelationId()
-                : request.getHeader(X_CORRELATION_ID);
+            ? generateCorrelationId()
+            : request.getHeader(X_CORRELATION_ID);
     }
 
     private String generateCorrelationId() {
