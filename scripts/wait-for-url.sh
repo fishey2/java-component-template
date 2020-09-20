@@ -9,7 +9,7 @@ fi
 
 echo "Waiting for $1"
 
-MAX_ATTEMPTS=5
+MAX_ATTEMPTS=10
 CURRENT_ATTEMPT=0
 
 # Check if the provided URL can be reached

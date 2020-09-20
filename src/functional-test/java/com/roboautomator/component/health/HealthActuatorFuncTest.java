@@ -54,17 +54,6 @@ public class HealthActuatorFuncTest {
     }
 
     @Test
-    void shouldReturnJMSStatusWhenRunning() {
-        given()
-            .when()
-            .get(HEALTH_PROBE_ENDPOINT)
-            .then()
-            .statusCode(200)
-            .body("components.jms.status", equalTo("UP"))
-            .body("components.jms.details.provider", equalTo("ActiveMQ"));
-    }
-
-    @Test
     void shouldReturnPingStatusWhenRunning() {
         given()
             .when()

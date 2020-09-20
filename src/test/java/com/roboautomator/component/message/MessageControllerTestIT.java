@@ -1,11 +1,13 @@
 package com.roboautomator.component.message;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.awaitility.Awaitility.await;
 import com.roboautomator.component.message.MessageEntity;
 import com.roboautomator.component.message.MessageRepository;
 import com.roboautomator.component.message.Message;
 import java.net.URL;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpSessionEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +20,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MessageControllerTestIT {
@@ -80,9 +84,13 @@ class MessageControllerTestIT {
         var responseBody = template.getForEntity(uri, Message.class).getBody();
 
         System.out.println(responseBody);
-        assertThat(responseBody).isNotNull();
-        assertThat(responseBody.getCorrelationId()).isEqualTo(correlationId);
-        assertThat(responseBody.getMessageBody()).isEqualTo("Hello World!");
+        await()
+            .atMost(20, TimeUnit.SECONDS)
+            .untilAsserted(() -> {
+                assertThat(responseBody).isNotNull();
+                assertThat(responseBody.getCorrelationId()).isEqualTo(correlationId);
+                assertThat(responseBody.getMessageBody()).isEqualTo("Hello World!");
+            });
     }
 
     @Test

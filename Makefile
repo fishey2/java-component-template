@@ -43,7 +43,7 @@ testIntegration: _setUpGradle _testComposeUp
 testFunctional: _setUpGradle _functionalComposeUp
 	make _waitForLocalService
 	echo "Running Functional tests"
-	./gradlew testFunctional
+	./gradlew testFunctional --stacktrace
 	make _functionalComposeDown
 
 analyseWithJacoco: _setUpGradle
@@ -56,4 +56,4 @@ analyseWithSonar: _gitFetchUnshallow _setUpGradle
 
 package: _setUpGradle
 	echo "Packaging service"
-	./gradlew bootJar
+	./gradlew clean bootJar

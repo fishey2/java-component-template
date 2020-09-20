@@ -21,8 +21,8 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-validation')
     implementation('org.projectlombok:lombok:1.18.12')
 
-    // For Message Queue
-    implementation('org.springframework.boot:spring-boot-starter-activemq')
+    // For Kafka
+    implementation('org.springframework.kafka:spring-kafka')
 
     // For Database
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -49,6 +49,7 @@ dependencies {
     testImplementation('io.rest-assured:rest-assured:4.2.0')
     testImplementation('io.rest-assured:json-path:4.2.0')
     testImplementation('io.rest-assured:xml-path:4.2.0')
+    testImplementation('org.awaitility:awaitility:3.1.6')
 
     // Annotations
     annotationProcessor('org.springframework.boot:spring-boot-configuration-processor')

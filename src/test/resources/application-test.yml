@@ -13,7 +13,7 @@ spring:
   main:
     banner-mode: off
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+    bootstrap-servers: localhost:9092
     properties:
       security.protocol: "PLAINTEXT"
     consumer:
@@ -34,6 +34,6 @@ spring:
       connection-timeout: 20000
       maximum-pool-size: 5
     driver-class-name: org.postgresql.Driver
-    url: ${DATABASE_URL:jdbc:postgresql://database:5432/java_component}
+    url: jdbc:postgresql://localhost:5432/java_component
     username: postgres
     password: postgres

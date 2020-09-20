@@ -4,9 +4,7 @@ import static com.roboautomator.component.util.StringHelper.cleanString;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jms.JmsException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
     private final MessageRepository messageRepository;
-    private final ActiveMQProducer producer;
+    private final KafkaProducer producer;
 
     @PostMapping
     public ResponseEntity<String> sendMessageToQueue(@RequestBody UserMessage userMessage) {
@@ -30,12 +28,7 @@ public class MessageController {
 
         log.info("Received request to send the message \"{}\" to queue", message);
 
-        try {
-            producer.sendMessage(message);
-        } catch (JmsException e) {
-            log.error("Could not process the message \"{}\", returning", message);
-            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(e.toString());
-        }
+        producer.send(message);
 
         return ResponseEntity.ok(message);
     }
