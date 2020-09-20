@@ -1,6 +1,7 @@
 package com.roboautomator.component.config.logging;
 
-import com.roboautomator.component.config.logging.LoggingConfig;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import com.roboautomator.component.middleware.LoggingMiddleware;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,9 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class LoggingConfigTest {
@@ -34,6 +32,6 @@ class LoggingConfigTest {
         loggingConfig.addInterceptors(interceptorRegistry);
 
         verify(interceptorRegistry, times(1))
-                .addInterceptor(loggingMiddleware);
+            .addInterceptor(loggingMiddleware);
     }
 }

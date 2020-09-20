@@ -1,12 +1,12 @@
 package com.roboautomator.component.config.swagger;
 
-import com.roboautomator.component.config.swagger.SwaggerConfig;
+import static com.roboautomator.component.config.swagger.SwaggerConfig.APPLICATION_DESCRIPTION;
+import static com.roboautomator.component.config.swagger.SwaggerConfig.APPLICATION_NAME;
+import static com.roboautomator.component.config.swagger.SwaggerConfig.APPLICATION_VERSION;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import springfox.documentation.spi.DocumentationType;
-
-import static com.roboautomator.component.config.swagger.SwaggerConfig.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class SwaggerConfigTest {
 
