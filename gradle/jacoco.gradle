@@ -1,0 +1,48 @@
+jacocoTestCoverageVerification {
+    sourceSets sourceSets.main
+
+    executionData test
+    executionData testIntegration
+
+    violationRules {
+        rule {
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 1.0
+            }
+            excludes = [
+                    'com.roboautomator.component.MainApplication' // Only calls main(String[]) which cannot be tested
+            ]
+        }
+    }
+}
+
+jacocoTestReport {
+    sourceSets sourceSets.main
+
+    executionData test
+    executionData testIntegration
+
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.enabled true
+    }
+
+    // Ensure exclusions are explicit
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'com/roboautomator/component/MainApplication*' // Only calls main(String[]) which cannot be tested
+            ])
+        }))
+    }
+}
+
+jacocoTestCoverageVerification.dependsOn test
+jacocoTestCoverageVerification.dependsOn testIntegration
+
+jacocoTestCoverageVerification.finalizedBy jacocoTestReport
+
+check.dependsOn jacocoTestCoverageVerification

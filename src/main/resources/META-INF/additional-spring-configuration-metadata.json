@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.swagger.endpoint",
+      "type": "java.lang.String",
+      "description": "Description for spring.swagger.endpoint."
+    }
+  ] }

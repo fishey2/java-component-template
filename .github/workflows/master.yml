@@ -1,0 +1,77 @@
+name: Java Component Template
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - README.md
+      - gradlew.bat
+      - LICENSE
+      - docs/*
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - README.md
+      - gradlew.bat
+      - LICENSE
+      - docs/*
+jobs:
+  build:
+    name: Test
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout Sourcecode
+        uses: actions/checkout@v2
+      - name: Setup Java Development Environment
+        uses: actions/setup-java@master
+        with:
+          version: '11'
+          architecture: 'x64'
+      - name: Setting Gradle Cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+      - name: Unit Tests
+        run: make test
+      - name: Integration Tests
+        run: make testIntegration
+      - name: Jacoco Analysis
+        run: make analyseWithJacoco
+      - name: SonarCloud Analysis
+        run: make analyseWithSonar
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Functional Tests
+        run: make testFunctional
+
+  deploy:
+    name: Package and Deploy
+    needs: [build]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Java Development Environment
+        uses: actions/setup-java@master
+        with:
+          version: '11'
+          architecture: 'x64'
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Packaging service
+        run: make package
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: fishey2/java-component-template/component
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          context: .
+          dockerfile: docker/component/Dockerfile
+          snapshot: true

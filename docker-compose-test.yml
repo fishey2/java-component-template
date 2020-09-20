@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  component:
+    image: docker.pkg.github.com/fishey2/java-component-template/component:0.1-SNAPSHOT
+    build:
+      context: .
+      dockerfile: docker/component/Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    ports:
+      - 8080:8080
+      - 8081:8081
+    depends_on:
+      - database
+  activemq:
+    image: rmohr/activemq:5.15.9-alpine
+    ports:
+      - 61616:61616
+      - 8161:8161
+  database:
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: java_component

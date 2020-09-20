@@ -1,16 +1,16 @@
 version: "3.7"
 services:
-  zookeeper:
-    image: wurstmeister/zookeeper
+  activemq:
+    image: rmohr/activemq:5.15.9-alpine
     ports:
-      - "2181:2181"
-  kafka:
-    image: bitnami/kafka
+      - 61616:61616
+      - 8161:8161
+  database:
+    image: postgres:12
     ports:
-      - "9092"
+      - 5432:5432
     environment:
-      HOSTNAME_COMMAND: "route -n | awk '/UG[ \t]/{print $$2}'"
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      ALLOW_PLAINTEXT_LISTENER: "yes"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: java_component
+

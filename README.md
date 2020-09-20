@@ -1,139 +1,133 @@
 # Java Component Template 
 
+## GitHub Actions Overall
+
 [![Actions Status](https://github.com/fishey2/java-component-template/workflows/Java%20CI/badge.svg)](https://github.com/fishey2/java-component-template/actions)
-[![codecov](https://codecov.io/gh/fishey2/java-component-template/branch/master/graph/badge.svg?token=BuPjnBJ5YK)](https://codecov.io/gh/fishey2/java-component-template)
+
+## SonarCloud Overall
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=alert_status)](https://sonarcloud.io/dashboard?id=fishey2_java-component-template)
+
+### SonarCloud Summary
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=sqale_rating)](https://sonarcloud.io/component_measures?id=fishey2_java-component-template&metric=Maintainability&view=list)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=reliability_rating)](https://sonarcloud.io/component_measures?id=fishey2_java-component-template&metric=Reliability&view=list)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=security_rating)](https://sonarcloud.io/component_measures?id=fishey2_java-component-template&metric=Security&view=list)
+
+### SonarCloud Details
+
+[![SonarCloud Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=ncloc)](https://sonarcloud.io/component_measures/metric/ncloc/list?id=fishey2_java-component-template)
+[![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=fishey2_java-component-template)
+[![SonarCloud Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=duplicated_lines_density)](https://sonarcloud.io/component_measures/metric/duplicated_lines_density/list?id=fishey2_java-component-template)
+[![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=bugs)](https://sonarcloud.io/component_measures/metric/reliability_rating/list?id=fishey2_java-component-template)
+[![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=vulnerabilities)](https://sonarcloud.io/component_measures/metric/vulnerabilities/list?id=fishey2_java-component-template)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=code_smells)](https://sonarcloud.io/component_measures?id=fishey2_java-component-template&metric=new_code_smells&view=list)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=fishey2_java-component-template&metric=sqale_index)](https://sonarcloud.io/component_measures?id=fishey2_java-component-template&metric=new_technical_debt&view=list)
+
 
 ## Description
 
 Component template project for Java including Spring Boot 2 and JUnit
 
-[Documentation](https://fishey2.github.io/java-component-template) for this, including testing Spring Boot 2 with JUnit5 and Mockito.
-
-## Dependencies
-
-The following dependencies are used within this project,
-
-| Dependency               | Version        | Usage                                              | Licence            |
-|--------------------------|----------------|:---------------------------------------------------|--------------------|
-| spring-boot-dependencies | v2.2.2.RELEASE | Dependencies for Spring Boot 2                     | Apache 2.0         |
-| spring-boot-starter-web  | v2.0.5.RELEASE | Spring Boot Web Starter for Configuring Spring App | Apache 2.0         |
-| logback-classic          | v1.2.3         | Logging framework                                  | EPL 1.0 & LGPL 2.1 |
-| springfox-swagger2       | v2.9.2         | API Auto Documentation                             | Apache 2.0         |
-| springfox-swagger-ui     | v2.9.2         | Serves the Swagger Documentation on the Spring App | Apache 2.0         |
-
-### Test Dependencies
-
-| Dependency               | Version        | Usage                                                 | Licence    |
-|--------------------------|----------------|-------------------------------------------------------|------------|
-| junit-jupiter            | v5.5.2         | Testing Framework                                     | EPL 2.0    |
-| spring-boot-starter-test | v2.0.5.RELEASE | Contains MockMVC for testing Spring Boot applications | Apache 2.0 |
-| mockito-core             | v2.22.0        | Java test mocking libraries                           | MIT        |
-| rest-assured             | v4.1.2         | API Test Framework                                    | Apache 2.0 |
-| json-path                | v4.1.2         | JsonPath Implementation                               | Apache 2.0 |
-| xml-path                 | v4.1.2         | XmlPath Implementation                                | Apache 2.0 |
-| 
-### Plugins
-
-| Plugin                          | Version       | Usage                               |
-|---------------------------------|---------------|:------------------------------------|
-| java                            | -             | Gradle Java Plugin                  | 
-| idea                            | -             | Gradle IntelliJ Plugin              |
-| jacoco                          | -             | Code coverage plugin                |
-| org.springframework.boot        | 2.0.5.RELEASE | Spring Boot plugin                  | 
-| io.spring.dependency-management | 1.0.7.RELEASE | Spring Dependency Management plugin |
-| com.avast.gradle.docker-compose | 0.10.7        | Docker Compose Gradle plugin        |
-| org.sonarqube                   | v2.8          | SonarQube plugin                    | 
-
-### Integration
-
-| Integration                                                                       | Usage                               |
-|----------------------------------------------------------------------------------|------------------------------------|
-| [GitHub Actions](https://github.com/fishey2/java-component-template/actions)     | Continuous Integration Tool        |
-| [SonarCloud](https://sonarcloud.io/dashboard?id=fishey2_java-component-template) | Code Quality and Security Analysis 
-| [CodeCov](https://codecov.io/gh/fishey2/java-component-template)                 | Test Coverage and Analysis         |
- 
-## Docker
+The goal of this template project is to have branches that are ready to go with different non-conflicting 
+implementations for various things on-top of the master branch.
 
 ```bash
+// Pull in the reference implementation for ActiveMQ
+git pull origin with_activemq
 
-# Compile first
-./gradlew clean build
+// Pull in the reference implementation for PostgreSQL
+git pull origin with_postgresql
 
-# Building the docker container
-(projectRoot)$ docker-compose build
-
--> This will generate a container docker.pkg.github.com/fishey2/java-component-template/component:0.1-SNAPSHOT
-
-# Running the docker container
-(projectRoot)$ docker-compose up &
-
--> This will launch the service on port 8080
-
-# Stopping the docker container
-(projectRoot)$ docker-compose down
+// Pull in the reference implementation for Flyway DB Migrations
+git pull origin with_flyway
 ```
 
-# Apache Kafka Integration
+List of branches:
+- [with_codecov](https://github.com/fishey2/java-component-template/tree/with_codecov)
+- [with_kafka](https://github.com/fishey2/java-component-template/tree/with_kafka)
 
-```
-version: '2'
-services:
- zookeeper:
-   image: wurstmeister/zookeeper
-   ports:
-     - "2181:2181"
- kafka:
-   build: .
-   ports:
-     - "9092"
-   environment:
-     KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100 (DockerIP)
-        OR
-     HOSTNAME_COMMAND: "route -n | awk '/UG[ \t]/{print $$2}'"
-     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-   volumes:
-     - /var/run/docker.sock:/var/run/docker.sock
-```
-## Apache Zookeeper
+## Testing
 
-https://zookeeper.apache.org/
+Currently Implemented Quality Gates:
 
-Spring + Kafka: https://docs.spring.io/spring-kafka/reference/html/
+| Gate Number | Description                  | Condition            |
+|------------:|------------------------------|----------------------|
+|           1 | Unit Tests                   | 100% PASS            |
+|           2 | Integration Tests            | 100% PASS            |
+|           3 | Jacoco (Code Coverage)       | 100% BRANCH COVERAGE |
+|           4 | SonarCloud (Static Analysis) | NOT IMPLEMENTED      |
+|           5 | Functional Tests             | 100% PASS            |
 
-### Docker Image (Kafka/Zookeeper)
+### Development
 
-Finding the executables for kafka:
+For development, it is suggested that you run using Gradle and bring up docker yourself.
 
 ```bash
-$ docker ps
+$ docker-compose up -d
 
-$ docker exec -it <id:kafka> /bin/bash
+$ gradle test
 
-I have no name!@<id>$ cd opt/bitnami/kafka/bin
+$ docker-compose down
 ```
 
-Creating new topic:
+### Unit/Integration
+
+To run the unit/integration tests
+
 ```bash
-I have no name!@<id>$ kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
-
-I have no name!@<id>$ kafka-topics.sh --list --bootstrap-server localhost:9092
-test
+$ make test
 ```
 
-Producing messages on topic:
+### Functional
+
+For functional tests, you should use make, which will build the application and docker container
+
 ```bash
-I have no name!@<id>$ kafka-console-producer.sh --broker-list localhost:9092 --topic test
-> Hello!
-> Hello Again!
-
-# Consuming messages
-I have no name!@<id>$ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
-Hello!
-Hello Again!
-
-Processed a total of 2 messages
+$ make testFunctional
 ```
 
-Configuring Spring Boot with gradle https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/gradle-plugin/reference/html/
+This runs the equivalent of
+```bash
 
+# Creates java executable
+$ ./gradlew bootJar
+
+# Builds the docker container
+$ docker-compose -f docker-compose-test.yml build
+
+# Launches the docker container
+$ docker-compose -f docker-compose-test.yml up -d
+
+# Waits for service locally
+./scripts/wait-for-url.sh http://localhost:8080
+
+# Runs the tests
+$ ./gradlew functionalTest
+
+# Tears down containers
+$ docker-compose -f docker-compose-test.yml down
+```
+
+## Reference Implementations
+
+A list of Reference Implementations
+- [Testing](docs/testing/index.md)
+- [Messaging](docs/messaging/activemq.md)
+
+## To be converted to docs
+
+### CodeCov
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./build/reports/jacoco/test/jacocoUnitTestReport.xml
+          flags: unittests
+          name: codecov-umbrella
+
+### Spring profiles
+
+Set env variable
+
+`SPRING_PROFILES_ACTIVE=test` 

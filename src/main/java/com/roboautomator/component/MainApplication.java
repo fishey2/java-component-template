@@ -2,13 +2,11 @@ package com.roboautomator.component;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.springframework.context.annotation.Import;
 
-@EnableSwagger2
 @SpringBootApplication
 public class MainApplication {
-
     public static void main(String[] args) {
-        SpringApplication.run(MainApplication.class, args);
+        SpringApplication.run(MainApplication.class);
     }
 }
