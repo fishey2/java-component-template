@@ -1,5 +1,7 @@
 package com.roboautomator.component.patient.utils;
 
+import java.time.Instant;
+
 public class PatientTestUtils {
 
     private PatientTestUtils() {
@@ -7,7 +9,7 @@ public class PatientTestUtils {
     }
 
     public static String getPatientNumber() {
-        var randomNumber = Math.random();
-        return String.format("%.0f", Math.ceil(randomNumber * 10000000000.0));
+        var randomNumberStr = "" + Instant.now().getEpochSecond() + Instant.now().getNano();
+        return randomNumberStr.substring(randomNumberStr.length() - 13, randomNumberStr.length() - 3);
     }
 }
