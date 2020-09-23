@@ -17,8 +17,8 @@ on:
       - LICENSE
       - docs/*
 jobs:
-  # Unit and Integration Tests
-  test:
+  build:
+    name: Test
     runs-on: [ubuntu-latest]
     steps:
       - name: Checkout Sourcecode
@@ -35,44 +35,23 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-      - name: Test with Coverage
-        run: ./gradlew test
-      - name: Analysis with SonarCloud
-        run: ./gradlew sonarqube
+      - name: Unit Tests
+        run: make test
+      - name: Integration Tests
+        run: make testIntegration
+      - name: Jacoco Analysis
+        run: make analyseWithJacoco
+      - name: SonarCloud Analysis
+        run: make analyseWithSonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./build/reports/jacoco/test/jacocoTestReport.xml
-          flags: unittests
-          name: codecov-umbrella
-
-
-  # Package and Functional Tests
-  functional-tests:
-    runs-on: [ubuntu-latest]
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout Sourcecode
-        uses: actions/checkout@v2
-      - name: Setup Java Development Environment
-        uses: actions/setup-java@master
-        with:
-          version: '11'
-          architecture: 'x64'
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
       - name: Functional Tests
-        run: ./gradlew functionalTest
+        run: make testFunctional
 
-  # Deploy Docker Image
-  deploy-docker:
-    needs: [test, functional-tests]
+  deploy:
+    name: Package and Deploy
+    needs: [build]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
@@ -84,7 +63,8 @@ jobs:
           architecture: 'x64'
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - run: ./gradlew bootJar
+      - name: Packaging service
+        run: make package
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
@@ -95,4 +75,3 @@ jobs:
           context: .
           dockerfile: docker/component/Dockerfile
           snapshot: true
-

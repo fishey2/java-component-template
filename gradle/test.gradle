@@ -1,0 +1,11 @@
+test {
+    useJUnitPlatform()
+
+    filter {
+        includeTestsMatching "*Test"
+    }
+
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
